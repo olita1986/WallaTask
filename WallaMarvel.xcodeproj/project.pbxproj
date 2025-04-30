@@ -30,6 +30,9 @@
 		AF99BE8C8FC1DE4178D39965 /* Pods_WallaMarvel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27133A00A66EF91557A95FF4 /* Pods_WallaMarvel.framework */; };
 		B44173F44B16313EF24D8ED3 /* Pods_WallaMarvel_WallaMarvelUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A318E79FD19C1EE3A972A3 /* Pods_WallaMarvel_WallaMarvelUITests.framework */; };
 		CEEB6D6D448C150745880569 /* Pods_WallaMarvelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D0BB56F90DDBDFBE6933F7 /* Pods_WallaMarvelTests.framework */; };
+		DABCE5C22DC271AB00A6FA77 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */; };
+		DABCE5C62DC2727B00A6FA77 /* HeroCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */; };
+		DABCE5C82DC272C600A6FA77 /* HeroDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,9 @@
 		B07DF4A661FBEFBDC6D96C2E /* Pods-WallaMarvelTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallaMarvelTests.debug.xcconfig"; path = "Target Support Files/Pods-WallaMarvelTests/Pods-WallaMarvelTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B40C4BB3B0477474BE5C2C4E /* Pods-WallaMarvel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallaMarvel.release.xcconfig"; path = "Target Support Files/Pods-WallaMarvel/Pods-WallaMarvel.release.xcconfig"; sourceTree = "<group>"; };
 		D9A318E79FD19C1EE3A972A3 /* Pods_WallaMarvel_WallaMarvelUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WallaMarvel_WallaMarvelUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroCoordinator.swift; sourceTree = "<group>"; };
+		DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,10 +154,10 @@
 		1A0E3A972862F7E200132FCB /* WallaMarvel */ = {
 			isa = PBXGroup;
 			children = (
+				DABCE5C32DC2722600A6FA77 /* Scenes */,
+				DABCE5C02DC2719300A6FA77 /* Utilities */,
 				1A0E3A982862F7E200132FCB /* AppDelegate.swift */,
 				1A0E3A9A2862F7E200132FCB /* SceneDelegate.swift */,
-				1A821EC42862FD470024D397 /* List Heroes */,
-				1A821EC52862FD500024D397 /* Detail Heroe */,
 				1A821EC62862FD650024D397 /* Domain */,
 				1A821EC72862FD6E0024D397 /* Data */,
 				1A0E3AA12862F7E300132FCB /* Assets.xcassets */,
@@ -193,6 +199,7 @@
 		1A821EC52862FD500024D397 /* Detail Heroe */ = {
 			isa = PBXGroup;
 			children = (
+				DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */,
 			);
 			path = "Detail Heroe";
 			sourceTree = "<group>";
@@ -241,6 +248,32 @@
 				1AC0347E2863214900E93178 /* GetHeroes.swift */,
 			);
 			path = UseCases;
+			sourceTree = "<group>";
+		};
+		DABCE5C02DC2719300A6FA77 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		DABCE5C32DC2722600A6FA77 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				DABCE5C42DC2725C00A6FA77 /* Heroes */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		DABCE5C42DC2725C00A6FA77 /* Heroes */ = {
+			isa = PBXGroup;
+			children = (
+				1A821EC42862FD470024D397 /* List Heroes */,
+				1A821EC52862FD500024D397 /* Detail Heroe */,
+				DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */,
+			);
+			path = Heroes;
 			sourceTree = "<group>";
 		};
 		E6E551DC10F86994C93B46B1 /* Pods */ = {
@@ -461,9 +494,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-WallaMarvel/Pods-WallaMarvel-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-WallaMarvel/Pods-WallaMarvel-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -478,9 +515,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-WallaMarvel-WallaMarvelUITests/Pods-WallaMarvel-WallaMarvelUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-WallaMarvel-WallaMarvelUITests/Pods-WallaMarvel-WallaMarvelUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -499,6 +540,7 @@
 				1AC0347F2863214900E93178 /* GetHeroes.swift in Sources */,
 				1A7B9BBD286D81AA00EBC1A6 /* CharacterDataModel.swift in Sources */,
 				1A0E3A992862F7E200132FCB /* AppDelegate.swift in Sources */,
+				DABCE5C62DC2727B00A6FA77 /* HeroCoordinator.swift in Sources */,
 				1A821ECC2862FF990024D397 /* String+MD5.swift in Sources */,
 				1A821ED6286305590024D397 /* MarvelDataSource.swift in Sources */,
 				1A3B732A286AE195007BF626 /* ListHeroesAdapter.swift in Sources */,
@@ -508,7 +550,9 @@
 				1A3B7326286ADD1E007BF626 /* ListHeroesTableView.swift in Sources */,
 				1A3B7328286ADEE6007BF626 /* ListHeroesTableViewCell.swift in Sources */,
 				1A821ED4286302EC0024D397 /* CharacterResponseDataModel.swift in Sources */,
+				DABCE5C82DC272C600A6FA77 /* HeroDetailViewController.swift in Sources */,
 				1A821EC92862FE3C0024D397 /* APIClient.swift in Sources */,
+				DABCE5C22DC271AB00A6FA77 /* BaseCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
