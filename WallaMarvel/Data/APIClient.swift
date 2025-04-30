@@ -1,18 +1,22 @@
 import Foundation
 
 protocol APIClientProtocol {
-    func getHeroes(completionBlock: @escaping (CharacterDataContainer) -> Void)
+    func getHeroes() async throws -> CharacterDataContainer
 }
 
 final class APIClient: APIClientProtocol {
-    enum Constant {
+    private enum Constant {
         static let privateKey = "bfb693b074fe878aae4de08d3a69142789875b1c"
         static let publicKey = "428d83e6ad1718e08d61ee45dacca712"
     }
     
-    init() { }
+    private let urlSession: URLSession
     
-    func getHeroes(completionBlock: @escaping (CharacterDataContainer) -> Void) {
+    init(urlSession: URLSession = .shared) {
+        self.urlSession = urlSession
+    }
+    
+    func getHeroes() async throws -> CharacterDataContainer {
         let ts = String(Int(Date().timeIntervalSince1970))
         let privateKey = Constant.privateKey
         let publicKey = Constant.publicKey
@@ -27,12 +31,28 @@ final class APIClient: APIClientProtocol {
             URLQueryItem(name: key, value: value)
         }
         
-        let urlRequest = URLRequest(url: urlComponent!.url!)
+        guard let url = urlComponent?.url else {
+            throw NetworkError.invalidURL
+        }
+
+        let urlRequest = URLRequest(url: url)
         
-        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            let dataModel = try! JSONDecoder().decode(CharacterDataContainer.self, from: data!)
-            completionBlock(dataModel)
-            print(dataModel)
-        }.resume()
+        let (data, response) = try await urlSession.data(for: urlRequest)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw NetworkError.invalidResponse
+        }
+
+        do {
+            return try JSONDecoder().decode(CharacterDataContainer.self, from: data)
+        } catch {
+            throw NetworkError.decodingError(error)
+        }
     }
+}
+
+enum NetworkError: Error {
+    case invalidURL
+    case invalidResponse
+    case decodingError(Error)
 }

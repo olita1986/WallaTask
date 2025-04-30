@@ -25,9 +25,13 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
     // MARK: UseCases
     
     func getHeroes() {
-        getHeroesUseCase.execute { characterDataContainer in
-            print("Characters \(characterDataContainer.characters)")
-            self.ui?.update(heroes: characterDataContainer.characters)
+        Task {
+            do {
+                let characterDataContainer = try await getHeroesUseCase.execute()
+                self.ui?.update(heroes: characterDataContainer.characters)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }
