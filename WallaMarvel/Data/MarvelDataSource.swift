@@ -12,6 +12,8 @@ final class MarvelDataSource: MarvelDataSourceProtocol {
     }
     
     func getHeroes() async throws -> CharacterDataContainer {
-        try await apiClient.getHeroes()
+        let heroesURLString = "https://gateway.marvel.com:443/v1/public/characters"
+        return try await apiClient.makeRequest(model: CharacterDataContainer.self,
+                                               withURL: heroesURLString)
     }
 }

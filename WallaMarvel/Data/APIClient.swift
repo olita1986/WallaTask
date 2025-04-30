@@ -1,7 +1,8 @@
 import Foundation
 
 protocol APIClientProtocol {
-    func getHeroes() async throws -> CharacterDataContainer
+    func makeRequest<T: Decodable>(model: T.Type,
+                                 withURL urlString: String) async throws -> T
 }
 
 final class APIClient: APIClientProtocol {
@@ -16,7 +17,7 @@ final class APIClient: APIClientProtocol {
         self.urlSession = urlSession
     }
     
-    func getHeroes() async throws -> CharacterDataContainer {
+    func makeRequest<T: Decodable>(model: T.Type, withURL urlString: String) async throws -> T {
         let ts = String(Int(Date().timeIntervalSince1970))
         let privateKey = Constant.privateKey
         let publicKey = Constant.publicKey
@@ -25,8 +26,7 @@ final class APIClient: APIClientProtocol {
                                             "ts": ts,
                                             "hash": hash]
         
-        let endpoint = "https://gateway.marvel.com:443/v1/public/characters"
-        var urlComponent = URLComponents(string: endpoint)
+        var urlComponent = URLComponents(string: urlString)
         urlComponent?.queryItems = parameters.map { (key, value) in
             URLQueryItem(name: key, value: value)
         }
@@ -44,7 +44,7 @@ final class APIClient: APIClientProtocol {
         }
 
         do {
-            return try JSONDecoder().decode(CharacterDataContainer.self, from: data)
+            return try JSONDecoder().decode(T.self, from: data)
         } catch {
             throw NetworkError.decodingError(error)
         }
