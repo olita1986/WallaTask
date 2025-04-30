@@ -4,6 +4,7 @@ protocol ListHeroesPresenterProtocol: AnyObject {
     var ui: ListHeroesUI? { get set }
     func screenTitle() -> String
     func getHeroes()
+    func showHeroDetail(forHero hero: CharacterDataModel)
 }
 
 protocol ListHeroesUI: AnyObject {
@@ -11,6 +12,10 @@ protocol ListHeroesUI: AnyObject {
 }
 
 final class ListHeroesPresenter: ListHeroesPresenterProtocol {
+    // MARK: - Navigation
+
+    var showHeroDetail: ((CharacterDataModel) -> Void)?
+    
     var ui: ListHeroesUI?
     private let getHeroesUseCase: GetHeroesUseCaseProtocol
     
@@ -33,6 +38,12 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    // MARK: - Public Properties
+
+    func showHeroDetail(forHero hero: CharacterDataModel) {
+        showHeroDetail?(hero)
     }
 }
 

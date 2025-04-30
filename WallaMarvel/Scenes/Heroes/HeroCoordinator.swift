@@ -10,9 +10,18 @@ import Foundation
 final class HeroCoordinator: BaseCoordinator {
     override func start() {
         let presenter = ListHeroesPresenter()
+        presenter.showHeroDetail = { [weak self] hero in
+            self?.showHeroDetail(forHero: hero)
+        }
         let listHeroesViewController = ListHeroesViewController()
         listHeroesViewController.presenter = presenter
         listHeroesViewController.title = "Hero List"
         navigationController.pushViewController(listHeroesViewController, animated: false)
+    }
+    
+    private func showHeroDetail(forHero hero: CharacterDataModel) {
+        let heroDetailViewController = HeroDetailViewController()
+        heroDetailViewController.title = hero.name
+        navigationController.pushViewController(heroDetailViewController, animated: true)
     }
 }
