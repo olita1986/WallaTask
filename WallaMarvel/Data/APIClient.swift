@@ -2,7 +2,8 @@ import Foundation
 
 protocol APIClientProtocol {
     func makeRequest<T: Decodable>(model: T.Type,
-                                 withURL urlString: String) async throws -> T
+                                   endpoint: String,
+                                   parameters: [String : String]?) async throws -> T
 }
 
 final class APIClient: APIClientProtocol {
@@ -12,26 +13,16 @@ final class APIClient: APIClientProtocol {
     }
     
     private let urlSession: URLSession
+    private let baseURLString = "https://gateway.marvel.com:443/v1/public"
     
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
     }
     
-    func makeRequest<T: Decodable>(model: T.Type, withURL urlString: String) async throws -> T {
-        let ts = String(Int(Date().timeIntervalSince1970))
-        let privateKey = Constant.privateKey
-        let publicKey = Constant.publicKey
-        let hash = "\(ts)\(privateKey)\(publicKey)".md5
-        let parameters: [String: String] = ["apikey": publicKey,
-                                            "ts": ts,
-                                            "hash": hash]
-        
-        var urlComponent = URLComponents(string: urlString)
-        urlComponent?.queryItems = parameters.map { (key, value) in
-            URLQueryItem(name: key, value: value)
-        }
-        
-        guard let url = urlComponent?.url else {
+    func makeRequest<T: Decodable>(model: T.Type,
+                                   endpoint: String,
+                                   parameters: [String: String]?) async throws -> T {
+        guard let url = createURL(endpoint: endpoint, parameters: parameters) else {
             throw NetworkError.invalidURL
         }
 
@@ -48,6 +39,31 @@ final class APIClient: APIClientProtocol {
         } catch {
             throw NetworkError.decodingError(error)
         }
+    }
+    
+    private func createURL(endpoint: String, parameters: [String : String]?) -> URL? {
+        let ts = String(Int(Date().timeIntervalSince1970))
+        let privateKey = Constant.privateKey
+        let publicKey = Constant.publicKey
+        let hash = "\(ts)\(privateKey)\(publicKey)".md5
+        var baseParameters: [String: String] = ["apikey": publicKey,
+                                                "ts": ts,
+                                                "hash": hash]
+        if let parameters {
+            for (key, value) in parameters {
+                baseParameters[key] = value
+            }
+        }
+        
+        guard var urlComponents = URLComponents(string: baseURLString + endpoint) else {
+            return nil
+        }
+    
+        urlComponents.queryItems = baseParameters.map { (key, value) in
+            URLQueryItem(name: key, value: value)
+        }
+        
+        return urlComponents.url
     }
 }
 
