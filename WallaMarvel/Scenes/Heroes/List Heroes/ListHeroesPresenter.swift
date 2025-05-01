@@ -16,7 +16,7 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
 
     var showHeroDetail: ((CharacterDataModel) -> Void)?
     
-    var ui: ListHeroesUI?
+    weak var ui: ListHeroesUI?
     private let getHeroesUseCase: GetHeroesUseCaseProtocol
     
     init(getHeroesUseCase: GetHeroesUseCaseProtocol = GetHeroes()) {
@@ -33,7 +33,9 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
         Task {
             do {
                 let characterDataContainer = try await getHeroesUseCase.execute()
-                self.ui?.update(heroes: characterDataContainer.characters)
+                await MainActor.run {
+                    self.ui?.update(heroes: characterDataContainer.characters)
+                }
             } catch {
                 print(error.localizedDescription)
             }

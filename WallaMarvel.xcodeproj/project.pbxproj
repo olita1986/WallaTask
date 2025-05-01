@@ -30,6 +30,7 @@
 		AF99BE8C8FC1DE4178D39965 /* Pods_WallaMarvel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27133A00A66EF91557A95FF4 /* Pods_WallaMarvel.framework */; };
 		B44173F44B16313EF24D8ED3 /* Pods_WallaMarvel_WallaMarvelUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A318E79FD19C1EE3A972A3 /* Pods_WallaMarvel_WallaMarvelUITests.framework */; };
 		CEEB6D6D448C150745880569 /* Pods_WallaMarvelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D0BB56F90DDBDFBE6933F7 /* Pods_WallaMarvelTests.framework */; };
+		DA6D61DA2DC3829C00BC5921 /* HeroDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6D61D92DC3829C00BC5921 /* HeroDetailPresenter.swift */; };
 		DABCE5C22DC271AB00A6FA77 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */; };
 		DABCE5C62DC2727B00A6FA77 /* HeroCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */; };
 		DABCE5C82DC272C600A6FA77 /* HeroDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */; };
@@ -86,6 +87,7 @@
 		B07DF4A661FBEFBDC6D96C2E /* Pods-WallaMarvelTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallaMarvelTests.debug.xcconfig"; path = "Target Support Files/Pods-WallaMarvelTests/Pods-WallaMarvelTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B40C4BB3B0477474BE5C2C4E /* Pods-WallaMarvel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallaMarvel.release.xcconfig"; path = "Target Support Files/Pods-WallaMarvel/Pods-WallaMarvel.release.xcconfig"; sourceTree = "<group>"; };
 		D9A318E79FD19C1EE3A972A3 /* Pods_WallaMarvel_WallaMarvelUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WallaMarvel_WallaMarvelUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA6D61D92DC3829C00BC5921 /* HeroDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailPresenter.swift; sourceTree = "<group>"; };
 		DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroCoordinator.swift; sourceTree = "<group>"; };
 		DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewController.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */,
+				DA6D61D92DC3829C00BC5921 /* HeroDetailPresenter.swift */,
 			);
 			path = "Detail Heroe";
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 			files = (
 				1A821ED82863081A0024D397 /* MarvelRepository.swift in Sources */,
 				1A0E3A9D2862F7E200132FCB /* ListHeroesViewController.swift in Sources */,
+				DA6D61DA2DC3829C00BC5921 /* HeroDetailPresenter.swift in Sources */,
 				1AC0347F2863214900E93178 /* GetHeroes.swift in Sources */,
 				1A7B9BBD286D81AA00EBC1A6 /* CharacterDataModel.swift in Sources */,
 				1A0E3A992862F7E200132FCB /* AppDelegate.swift in Sources */,

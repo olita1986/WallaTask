@@ -20,8 +20,10 @@ final class HeroCoordinator: BaseCoordinator {
     }
     
     private func showHeroDetail(forHero hero: CharacterDataModel) {
+        let heroDetailPresenter = HeroDetailPresenter(hero: hero)
         let heroDetailViewController = HeroDetailViewController()
         heroDetailViewController.title = hero.name
+        heroDetailViewController.presenter = heroDetailPresenter
         navigationController.pushViewController(heroDetailViewController, animated: true)
     }
 }
