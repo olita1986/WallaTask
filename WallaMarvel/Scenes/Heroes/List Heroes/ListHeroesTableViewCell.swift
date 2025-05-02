@@ -12,10 +12,18 @@ final class ListHeroesTableViewCell: UITableViewCell {
     private let heroeName: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
+    private let mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 8
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        return stackView
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
@@ -31,20 +39,19 @@ final class ListHeroesTableViewCell: UITableViewCell {
     }
     
     private func addSubviews() {
-        addSubview(heroeImageView)
-        addSubview(heroeName)
+        mainStackView.addArrangedSubview(heroeImageView)
+        mainStackView.addArrangedSubview(heroeName)
+        contentView.addSubview(mainStackView)
     }
     
     private func addContraints() {
         NSLayoutConstraint.activate([
-            heroeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            heroeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             heroeImageView.heightAnchor.constraint(equalToConstant: 80),
-            heroeImageView.widthAnchor.constraint(equalToConstant: 80),
-            heroeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
-            
-            heroeName.leadingAnchor.constraint(equalTo: heroeImageView.trailingAnchor, constant: 12),
-            heroeName.topAnchor.constraint(equalTo: heroeImageView.topAnchor, constant: 8),
+            heroeImageView.widthAnchor.constraint(equalToConstant: 80)
         ])
     }
     
