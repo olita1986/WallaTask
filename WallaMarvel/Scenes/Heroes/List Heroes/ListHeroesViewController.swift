@@ -5,6 +5,7 @@ final class ListHeroesViewController: UIViewController {
     
     var presenter: ListHeroesPresenterProtocol?
     var listHeroesProvider: ListHeroesAdapter?
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func loadView() {
         view = ListHeroesView()
@@ -19,6 +20,15 @@ final class ListHeroesViewController: UIViewController {
         title = presenter?.screenTitle()
         
         mainView.heroesTableView.delegate = self
+        setupSearchController()
+    }
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Heroes"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
 }
 
@@ -53,3 +63,14 @@ extension ListHeroesViewController: UITableViewDelegate {
     }
 }
 
+extension ListHeroesViewController: UISearchControllerDelegate, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchText = searchController.searchBar.text ?? ""
+        
+        if searchText.isEmpty {
+            listHeroesProvider?.resetFilter()
+        } else {
+            listHeroesProvider?.searchHeroe(withText: searchText)
+        }
+    }
+}
