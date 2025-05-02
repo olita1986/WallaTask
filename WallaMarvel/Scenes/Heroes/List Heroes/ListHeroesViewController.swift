@@ -1,11 +1,17 @@
+import Combine
 import UIKit
 
 final class ListHeroesViewController: UIViewController {
+    // MARK: - Public Properties
+
     var mainView: ListHeroesView { return view as! ListHeroesView  }
     
     var presenter: ListHeroesPresenterProtocol?
     var listHeroesProvider: ListHeroesAdapter?
-    let searchController = UISearchController(searchResultsController: nil)
+    
+    // MARK: - Private Properties
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var cancellables = Set<AnyCancellable>()
     
     override func loadView() {
         view = ListHeroesView()
@@ -21,14 +27,24 @@ final class ListHeroesViewController: UIViewController {
         
         mainView.heroesTableView.delegate = self
         setupSearchController()
+        setupBindings()
     }
     
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Heroes"
+        searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
         definesPresentationContext = true
+    }
+    
+    private func setupBindings() {
+        mainView.refreshPublisher
+            .sink { [weak self] in
+                self?.presenter?.getHeroes(initialHeroes: true)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -45,13 +61,14 @@ extension ListHeroesViewController: ListHeroesUI {
     }
 
     func update(heroes: [CharacterDataModel]) {
+        mainView.stopRefreshing()
         listHeroesProvider?.heroes = heroes
     }
 }
 
 extension ListHeroesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let hero = listHeroesProvider?.heroes[indexPath.row] else { return }
+        guard let hero = listHeroesProvider?.filteredHeroes[indexPath.row] else { return }
         presenter?.showHeroDetail(forHero: hero)
     }
     
@@ -63,7 +80,7 @@ extension ListHeroesViewController: UITableViewDelegate {
     }
 }
 
-extension ListHeroesViewController: UISearchControllerDelegate, UISearchResultsUpdating {
+extension ListHeroesViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         let searchText = searchController.searchBar.text ?? ""
         
@@ -72,5 +89,13 @@ extension ListHeroesViewController: UISearchControllerDelegate, UISearchResultsU
         } else {
             listHeroesProvider?.searchHeroe(withText: searchText)
         }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        presenter?.setupSearchMode(isSearching: true)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        presenter?.setupSearchMode(isSearching: false)
     }
 }

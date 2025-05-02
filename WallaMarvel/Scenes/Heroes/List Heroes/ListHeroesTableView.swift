@@ -1,11 +1,16 @@
+import Combine
 import Foundation
 import UIKit
 
 final class ListHeroesView: UIView {
-    enum Constant {
+    // MARK: - Private Constants
+
+    private enum Constant {
         static let estimatedRowHeight: CGFloat = 120
     }
     
+    // MARK: - Public Properties
+
     let heroesTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ListHeroesTableViewCell.self, forCellReuseIdentifier: "ListHeroesTableViewCell")
@@ -15,6 +20,15 @@ final class ListHeroesView: UIView {
         return tableView
     }()
     
+    var refreshPublisher: AnyPublisher<Void, Never> {
+        refreshSubject.eraseToAnyPublisher()
+    }
+
+    // MARK: - Private Properties
+
+    private let refreshControl = UIRefreshControl()
+    private let refreshSubject = PassthroughSubject<Void, Never>()
+
     init() {
         super.init(frame: .zero)
         setup()
@@ -24,7 +38,19 @@ final class ListHeroesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public Methods
+    
+    func stopRefreshing() {
+        refreshControl.endRefreshing()
+    }
+    
+    // MARK: - Private Methods
+    
     private func setup() {
+        heroesTableView.refreshControl = refreshControl
+        refreshControl.addTarget(self,
+                                 action: #selector(refresh),
+                                 for: .valueChanged)
         addSubviews()
         addContraints()
     }
@@ -40,5 +66,10 @@ final class ListHeroesView: UIView {
             heroesTableView.topAnchor.constraint(equalTo: topAnchor),
             heroesTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
+    }
+    
+    @objc
+    private func refresh() {
+        refreshSubject.send()
     }
 }

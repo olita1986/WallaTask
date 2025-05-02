@@ -11,7 +11,7 @@ final class ListHeroesAdapter: NSObject, UITableViewDataSource {
         }
     }
     
-    private var filteredHeroes: [CharacterDataModel] = [] {
+    var filteredHeroes: [CharacterDataModel] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()

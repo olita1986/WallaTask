@@ -5,6 +5,7 @@ protocol ListHeroesPresenterProtocol: AnyObject {
     func screenTitle() -> String
     func getHeroes(initialHeroes: Bool)
     func showHeroDetail(forHero hero: CharacterDataModel)
+    func setupSearchMode(isSearching: Bool)
 }
 
 protocol ListHeroesUI: AnyObject {
@@ -33,6 +34,7 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
     // MARK: - Private Properties
 
     private let getHeroesUseCase: GetHeroesUseCaseProtocol
+    private var isSearching = false
     
     init(getHeroesUseCase: GetHeroesUseCaseProtocol = GetHeroes()) {
         self.getHeroesUseCase = getHeroesUseCase
@@ -51,10 +53,9 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
             hasMoreHeroes = true
         }
         
-        // Avoid extra call if it's fetching and has no more heroes
-        guard !isFetching, hasMoreHeroes else { return }
+        // Avoid extra calls if it's fetching, has no more heroes and isSearching
+        guard !isFetching, hasMoreHeroes, !isSearching else { return }
         isFetching = true
-        
         ui?.showPaginationLoading()
         Task {
             do {
@@ -80,10 +81,14 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
         }
     }
     
-    // MARK: - Public Properties
+    // MARK: - Public Methods
 
     func showHeroDetail(forHero hero: CharacterDataModel) {
         showHeroDetail?(hero)
+    }
+    
+    func setupSearchMode(isSearching: Bool) {
+        self.isSearching = isSearching
     }
 }
 
