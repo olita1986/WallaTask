@@ -11,6 +11,8 @@ protocol ListHeroesPresenterProtocol: AnyObject {
 protocol ListHeroesUI: AnyObject {
     func showPaginationLoading()
     func hidePaginationLoading()
+    func showError(_ error: String)
+    func showErrorPagination(_ error: String)
     func update(heroes: [CharacterDataModel])
 }
 
@@ -53,15 +55,25 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
             hasMoreHeroes = true
         }
         
-        // Avoid extra calls if it's fetching, has no more heroes and isSearching
-        guard !isFetching, hasMoreHeroes, !isSearching else { return }
+        // If there is no more heroes to load show a message
+        guard hasMoreHeroes else {
+            ui?.showErrorPagination("There is no more heroes to load")
+            return
+        }
+
+        // Avoid extra calls if it's fetching, and isSearching
+        guard !isFetching, !isSearching else { return }
         isFetching = true
         ui?.showPaginationLoading()
         Task {
             do {
+                // Get data
                 let characterDataContainer = try await getHeroesUseCase.execute(offset: currentOffset, limit: limit)
+                // Increase the offset
                 currentOffset += characterDataContainer.count
+                // Check if there is more heroes to load
                 hasMoreHeroes = currentOffset < characterDataContainer.total
+                // If it's initial load then replace the entire heroes else append then
                 if initialHeroes {
                     heroes = characterDataContainer.characters
                 } else {
@@ -74,9 +86,15 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
                     ui?.update(heroes: heroes)
                 }
             } catch {
-                isFetching = false
-                ui?.hidePaginationLoading()
-                print(error.localizedDescription)
+                await MainActor.run {
+                    isFetching = false
+                    ui?.hidePaginationLoading()
+                    if initialHeroes {
+                        ui?.showError(error.localizedDescription)
+                    } else {
+                        ui?.showErrorPagination(error.localizedDescription)
+                    }
+                }
             }
         }
     }

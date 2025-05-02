@@ -50,10 +50,7 @@ final class ListHeroesViewController: UIViewController {
 
 extension ListHeroesViewController: ListHeroesUI {
     func showPaginationLoading() {
-        let spinner = UIActivityIndicatorView(style: .medium)
-        spinner.startAnimating()
-        spinner.frame = CGRect(x: 0, y: 0, width: mainView.heroesTableView.bounds.width, height: 44)
-        mainView.heroesTableView.tableFooterView = spinner
+        mainView.heroesTableView.showPaginationLoading()
     }
 
     func hidePaginationLoading() {
@@ -63,6 +60,14 @@ extension ListHeroesViewController: ListHeroesUI {
     func update(heroes: [CharacterDataModel]) {
         mainView.stopRefreshing()
         listHeroesProvider?.heroes = heroes
+    }
+    
+    func showError(_ error: String) {
+        self.showAlert(message: error)
+    }
+    
+    func showErrorPagination(_ error: String) {
+        mainView.heroesTableView.showPaginationError(message: error)
     }
 }
 
