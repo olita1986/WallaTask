@@ -17,14 +17,6 @@ protocol ListHeroesUI: AnyObject {
 }
 
 final class ListHeroesPresenter: ListHeroesPresenterProtocol {
-    
-    // MARK: - Pagination
-    private var currentOffset = 0
-    private let limit = 15
-    private var isFetching = false
-    private var heroes = [CharacterDataModel]()
-    private var hasMoreHeroes = true
-
     // MARK: - Navigation
 
     var showHeroDetail: ((CharacterDataModel) -> Void)?
@@ -35,11 +27,12 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
     
     // MARK: - Private Properties
 
-    private let getHeroesUseCase: GetHeroesUseCaseProtocol
+    private let listHeroeHandler: ListHeroesHandlerProtocol
     private var isSearching = false
+    private var isFetching = false
     
-    init(getHeroesUseCase: GetHeroesUseCaseProtocol = GetHeroes()) {
-        self.getHeroesUseCase = getHeroesUseCase
+    init(listHeroeHandler: ListHeroesHandlerProtocol = ListHeroesHandler()) {
+        self.listHeroeHandler = listHeroeHandler
     }
     
     func screenTitle() -> String {
@@ -49,18 +42,6 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
     // MARK: UseCases
     
     func getHeroes(initialHeroes: Bool) {
-        // If we are fetching initial heroes then we reset offset and hasMoreHeroes
-        if initialHeroes {
-            currentOffset = 0
-            hasMoreHeroes = true
-        }
-        
-        // If there is no more heroes to load show a message
-        guard hasMoreHeroes else {
-            ui?.showErrorPagination("There is no more heroes to load")
-            return
-        }
-
         // Avoid extra calls if it's fetching, and isSearching
         guard !isFetching, !isSearching else { return }
         isFetching = true
@@ -68,17 +49,7 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
         Task {
             do {
                 // Get data
-                let characterDataContainer = try await getHeroesUseCase.execute(offset: currentOffset, limit: limit)
-                // Increase the offset
-                currentOffset += characterDataContainer.count
-                // Check if there is more heroes to load
-                hasMoreHeroes = currentOffset < characterDataContainer.total
-                // If it's initial load then replace the entire heroes else append then
-                if initialHeroes {
-                    heroes = characterDataContainer.characters
-                } else {
-                    heroes += characterDataContainer.characters
-                }
+                let heroes = try await listHeroeHandler.getData(initialHeroes: initialHeroes)
 
                 await MainActor.run {
                     isFetching = false
