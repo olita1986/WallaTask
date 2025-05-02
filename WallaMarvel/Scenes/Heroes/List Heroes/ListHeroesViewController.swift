@@ -13,7 +13,7 @@ final class ListHeroesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         listHeroesProvider = ListHeroesAdapter(tableView: mainView.heroesTableView)
-        presenter?.getHeroes()
+        presenter?.getHeroes(initialHeroes: true)
         presenter?.ui = self
         
         title = presenter?.screenTitle()
@@ -23,6 +23,17 @@ final class ListHeroesViewController: UIViewController {
 }
 
 extension ListHeroesViewController: ListHeroesUI {
+    func showPaginationLoading() {
+        let spinner = UIActivityIndicatorView(style: .medium)
+        spinner.startAnimating()
+        spinner.frame = CGRect(x: 0, y: 0, width: mainView.heroesTableView.bounds.width, height: 44)
+        mainView.heroesTableView.tableFooterView = spinner
+    }
+
+    func hidePaginationLoading() {
+        mainView.heroesTableView.tableFooterView = nil
+    }
+
     func update(heroes: [CharacterDataModel]) {
         listHeroesProvider?.heroes = heroes
     }
@@ -32,6 +43,13 @@ extension ListHeroesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let hero = listHeroesProvider?.heroes[indexPath.row] else { return }
         presenter?.showHeroDetail(forHero: hero)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let heroCount = listHeroesProvider?.heroes.count,
+              indexPath.row == heroCount - 2 else { return }
+        
+        presenter?.getHeroes(initialHeroes: false)
     }
 }
 
