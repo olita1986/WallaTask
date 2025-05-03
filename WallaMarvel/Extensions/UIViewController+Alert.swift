@@ -12,6 +12,10 @@ extension UIViewController {
         let alert = UIAlertController(title: title,
                                       message: message,
                                       preferredStyle: .alert)
+        alert.view.accessibilityIdentifier = AccessibilityIdentifiers.General.alert
+        let defaultAction = UIAlertAction(title: "OK", style: .default)
+        
+        alert.addAction(defaultAction)
 
         present(alert, animated: true)
     }

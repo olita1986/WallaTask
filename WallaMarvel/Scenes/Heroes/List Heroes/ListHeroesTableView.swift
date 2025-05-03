@@ -13,6 +13,7 @@ final class ListHeroesView: UIView {
 
     let heroesTableView: UITableView = {
         let tableView = UITableView()
+        tableView.accessibilityIdentifier = AccessibilityIdentifiers.HeroList.heroeTableView
         tableView.register(ListHeroesTableViewCell.self, forCellReuseIdentifier: "ListHeroesTableViewCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension

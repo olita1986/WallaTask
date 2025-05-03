@@ -13,7 +13,7 @@ final class APIClient: APIClientProtocol {
     }
     
     private let urlSession: URLSession
-    private let baseURLString = "https://gateway.marvel.com:443/v1/public"
+    private let baseURLString = "https://gateway.marvel.com/v1/public"
     
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession

@@ -23,6 +23,7 @@ final class HeroDetailViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = "Comics"
+        label.accessibilityIdentifier = AccessibilityIdentifiers.HeroDetail.heroDetailComicLabel
         return label
     }()
 
