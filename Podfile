@@ -15,7 +15,7 @@ target 'WallaMarvel' do
 
   target 'WallaMarvelUITests' do
     # Pods for testing
-    pod 'OHHTTPStubs/Swift'
+    pod 'OHHTTPStubs/Swift', '~> 9.1.0'
   end
 
 end
