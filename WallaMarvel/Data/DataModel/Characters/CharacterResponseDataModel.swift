@@ -1,6 +1,6 @@
 import Foundation
 
-struct CharacterDataContainer: Decodable {
+struct CharacterDataContainer: Decodable, Equatable {
     let count: Int
     let limit: Int
     let offset: Int
@@ -21,5 +21,17 @@ struct CharacterDataContainer: Decodable {
         self.total = try data.decode(Int.self, forKey: .total)
         
         self.characters = try data.decode([CharacterDataModel].self, forKey: .characters)
+    }
+    
+    init(count: Int,
+         limit: Int,
+         offset: Int,
+         total: Int,
+         characters: [CharacterDataModel]) {
+        self.count = count
+        self.limit = limit
+        self.offset = offset
+        self.total = total
+        self.characters = characters
     }
 }

@@ -41,6 +41,10 @@
 		DA6D61F32DC5169200BC5921 /* ListHeroesPresenterTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6D61F22DC5169200BC5921 /* ListHeroesPresenterTestCase.swift */; };
 		DA6D61F62DC5172800BC5921 /* ListHeroesHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6D61F52DC5172800BC5921 /* ListHeroesHandlerMock.swift */; };
 		DA6D61F82DC51BB200BC5921 /* ListHeroesUIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6D61F72DC51BB200BC5921 /* ListHeroesUIMock.swift */; };
+		DAA31E5D2DC630CC00CF2DB1 /* ListHeroesHandlerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E5C2DC630CC00CF2DB1 /* ListHeroesHandlerTestCase.swift */; };
+		DAA31E5F2DC6312D00CF2DB1 /* GetHeroesUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E5E2DC6312D00CF2DB1 /* GetHeroesUseCaseMock.swift */; };
+		DAA31E622DC631AE00CF2DB1 /* CharacterDataContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E612DC631AE00CF2DB1 /* CharacterDataContainerFactory.swift */; };
+		DAA31E642DC634D600CF2DB1 /* CharacterModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E632DC634D600CF2DB1 /* CharacterModelFactory.swift */; };
 		DABCE5C22DC271AB00A6FA77 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */; };
 		DABCE5C62DC2727B00A6FA77 /* HeroCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */; };
 		DABCE5C82DC272C600A6FA77 /* HeroDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */; };
@@ -108,6 +112,10 @@
 		DA6D61F22DC5169200BC5921 /* ListHeroesPresenterTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeroesPresenterTestCase.swift; sourceTree = "<group>"; };
 		DA6D61F52DC5172800BC5921 /* ListHeroesHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeroesHandlerMock.swift; sourceTree = "<group>"; };
 		DA6D61F72DC51BB200BC5921 /* ListHeroesUIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeroesUIMock.swift; sourceTree = "<group>"; };
+		DAA31E5C2DC630CC00CF2DB1 /* ListHeroesHandlerTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeroesHandlerTestCase.swift; sourceTree = "<group>"; };
+		DAA31E5E2DC6312D00CF2DB1 /* GetHeroesUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHeroesUseCaseMock.swift; sourceTree = "<group>"; };
+		DAA31E612DC631AE00CF2DB1 /* CharacterDataContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDataContainerFactory.swift; sourceTree = "<group>"; };
+		DAA31E632DC634D600CF2DB1 /* CharacterModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelFactory.swift; sourceTree = "<group>"; };
 		DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroCoordinator.swift; sourceTree = "<group>"; };
 		DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +201,7 @@
 		1A0E3AAE2862F7E300132FCB /* WallaMarvelTests */ = {
 			isa = PBXGroup;
 			children = (
+				DAA31E602DC6319100CF2DB1 /* Factories */,
 				DA6D61F42DC5171400BC5921 /* Mocks */,
 				DA6D61EF2DC5163A00BC5921 /* Scenes */,
 				1A0E3AAF2862F7E300132FCB /* WallaMarvelTests.swift */,
@@ -326,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				DA6D61F22DC5169200BC5921 /* ListHeroesPresenterTestCase.swift */,
+				DAA31E5C2DC630CC00CF2DB1 /* ListHeroesHandlerTestCase.swift */,
 			);
 			path = "List Heroes";
 			sourceTree = "<group>";
@@ -335,8 +345,18 @@
 			children = (
 				DA6D61F52DC5172800BC5921 /* ListHeroesHandlerMock.swift */,
 				DA6D61F72DC51BB200BC5921 /* ListHeroesUIMock.swift */,
+				DAA31E5E2DC6312D00CF2DB1 /* GetHeroesUseCaseMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		DAA31E602DC6319100CF2DB1 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				DAA31E612DC631AE00CF2DB1 /* CharacterDataContainerFactory.swift */,
+				DAA31E632DC634D600CF2DB1 /* CharacterModelFactory.swift */,
+			);
+			path = Factories;
 			sourceTree = "<group>";
 		};
 		DABCE5C02DC2719300A6FA77 /* Utilities */ = {
@@ -660,6 +680,10 @@
 				DA6D61F32DC5169200BC5921 /* ListHeroesPresenterTestCase.swift in Sources */,
 				DA6D61F62DC5172800BC5921 /* ListHeroesHandlerMock.swift in Sources */,
 				1A0E3AB02862F7E300132FCB /* WallaMarvelTests.swift in Sources */,
+				DAA31E5D2DC630CC00CF2DB1 /* ListHeroesHandlerTestCase.swift in Sources */,
+				DAA31E642DC634D600CF2DB1 /* CharacterModelFactory.swift in Sources */,
+				DAA31E622DC631AE00CF2DB1 /* CharacterDataContainerFactory.swift in Sources */,
+				DAA31E5F2DC6312D00CF2DB1 /* GetHeroesUseCaseMock.swift in Sources */,
 				DA6D61F82DC51BB200BC5921 /* ListHeroesUIMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
