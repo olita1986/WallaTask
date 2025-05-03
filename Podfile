@@ -7,6 +7,7 @@ target 'WallaMarvel' do
 
   # Pods for WallaMarvel
   pod 'Kingfisher', '~> 8.3'
+  pod 'OHHTTPStubs/Swift', '~> 9.1.0'
 
   target 'WallaMarvelTests' do
     inherit! :search_paths
@@ -15,7 +16,13 @@ target 'WallaMarvel' do
 
   target 'WallaMarvelUITests' do
     # Pods for testing
-    pod 'OHHTTPStubs/Swift', '~> 9.1.0'
   end
 
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "13.0"
+      end
+    end
+  end
 end
