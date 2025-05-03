@@ -7,7 +7,6 @@ target 'WallaMarvel' do
 
   # Pods for WallaMarvel
   pod 'Kingfisher', '~> 8.3'
-  pod 'OHHTTPStubs/Swift'
 
   target 'WallaMarvelTests' do
     inherit! :search_paths
@@ -16,6 +15,7 @@ target 'WallaMarvel' do
 
   target 'WallaMarvelUITests' do
     # Pods for testing
+    pod 'OHHTTPStubs/Swift'
   end
 
 end
