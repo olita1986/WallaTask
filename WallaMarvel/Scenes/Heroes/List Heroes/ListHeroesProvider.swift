@@ -2,6 +2,8 @@ import Foundation
 import UIKit
 
 final class ListHeroesProvider: NSObject, UITableViewDataSource {
+    // MARK: - Public Properties
+
     var heroes: [CharacterDataModel] {
         didSet {
             filteredHeroes = heroes
@@ -19,6 +21,8 @@ final class ListHeroesProvider: NSObject, UITableViewDataSource {
         }
     }
 
+    // MARK: - Private Properties
+
     private let tableView: UITableView
     
     init(tableView: UITableView, heroes: [CharacterDataModel] = []) {
@@ -28,6 +32,8 @@ final class ListHeroesProvider: NSObject, UITableViewDataSource {
         self.tableView.dataSource = self
     }
     
+    // MARK: - Delegate Methods
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         filteredHeroes.count
     }
@@ -42,14 +48,22 @@ final class ListHeroesProvider: NSObject, UITableViewDataSource {
         
         return cell
     }
-    
-    func resetFilter() {
-        filteredHeroes = heroes
+
+    // MARK: - Public Methods
+
+    func searchHeroe(withText text: String?) {
+        if let text, !text.isEmpty {
+            filteredHeroes = heroes.filter {
+                $0.name.lowercased().contains(text.lowercased())
+            }
+        } else {
+            resetFilter()
+        }
     }
     
-    func searchHeroe(withText text: String) {
-        filteredHeroes = heroes.filter {
-            $0.name.lowercased().contains(text.lowercased())
-        }
+    // MARK: - Private Methods
+
+    private func resetFilter() {
+        filteredHeroes = heroes
     }
 }

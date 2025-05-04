@@ -97,13 +97,8 @@ extension ListHeroesViewController: UITableViewDelegate {
 
 extension ListHeroesViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        let searchText = searchController.searchBar.text ?? ""
-        
-        if searchText.isEmpty {
-            listHeroesProvider?.resetFilter()
-        } else {
-            listHeroesProvider?.searchHeroe(withText: searchText)
-        }
+        let searchText = searchController.searchBar.text
+        listHeroesProvider?.searchHeroe(withText: searchText)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
