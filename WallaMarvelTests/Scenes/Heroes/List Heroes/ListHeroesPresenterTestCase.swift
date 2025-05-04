@@ -10,10 +10,14 @@ import XCTest
 
 final class ListHeroesPresenterTestCase: XCTestCase {
 
+    // MARK: - Private Properties
+
     private var sut: ListHeroesPresenter!
     private var listHeroesHandlerMock: ListHeroesHandlerMock!
     private var listHeroesUIMock: ListHeroesUIMock!
     
+    // MARK: - Setup
+
     override func setUp() {
         super.setUp()
         
@@ -29,6 +33,8 @@ final class ListHeroesPresenterTestCase: XCTestCase {
         super.tearDown()
     }
 
+    // MARK: - Show Screen Title
+
     func testScreenTitle() throws {
         // When
         let title = sut.screenTitle()
@@ -37,6 +43,8 @@ final class ListHeroesPresenterTestCase: XCTestCase {
         XCTAssertEqual(title, "List of Heroes")
     }
     
+    // MARK: - Show Hero
+
     func testShowHeroDetail() {
         // Given
         let expectation = expectation(description: "Should receive hero")
@@ -61,12 +69,14 @@ final class ListHeroesPresenterTestCase: XCTestCase {
         XCTAssertEqual(receivedHero, hero)
     }
     
+    // MARK: - Get Heroes
+
     func testGetHeroes_whenIsSearching_shouldNotMakeCall() {
         // Given
         sut.setupSearchMode(isSearching: true)
         
         // When
-        sut.getHeroes(initialHeroes: true)
+        sut.getHeroes(initialHeroes: true, forceRefresh: false)
         
         // Then
         XCTAssertEqual(listHeroesHandlerMock.getDataCallCount, 0)
@@ -86,7 +96,7 @@ final class ListHeroesPresenterTestCase: XCTestCase {
         }
 
         // When
-        sut.getHeroes(initialHeroes: true)
+        sut.getHeroes(initialHeroes: true, forceRefresh: false)
 
         waitForExpectations(timeout: 1)
 
@@ -109,7 +119,7 @@ final class ListHeroesPresenterTestCase: XCTestCase {
         }
 
         // When
-        sut.getHeroes(initialHeroes: true)
+        sut.getHeroes(initialHeroes: true, forceRefresh: false)
 
         waitForExpectations(timeout: 1)
 
@@ -132,7 +142,7 @@ final class ListHeroesPresenterTestCase: XCTestCase {
         }
 
         // When
-        sut.getHeroes(initialHeroes: false)
+        sut.getHeroes(initialHeroes: false, forceRefresh: false)
 
         waitForExpectations(timeout: 1)
 
@@ -158,8 +168,8 @@ final class ListHeroesPresenterTestCase: XCTestCase {
         }
 
         // When
-        sut.getHeroes(initialHeroes: true)
-        sut.getHeroes(initialHeroes: true)
+        sut.getHeroes(initialHeroes: true, forceRefresh: false)
+        sut.getHeroes(initialHeroes: true, forceRefresh: false)
 
         waitForExpectations(timeout: 1)
 

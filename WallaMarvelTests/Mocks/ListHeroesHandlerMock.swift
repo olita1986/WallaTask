@@ -11,7 +11,7 @@ import Foundation
 final class ListHeroesHandlerMock: ListHeroesHandlerProtocol {
     private(set) var getDataCallCount = 0
     var result: Result<[CharacterDataModel], Error> = .success([])
-    func getData(initialHeroes: Bool) async throws -> [CharacterDataModel] {
+    func getData(initialHeroes: Bool, forceRefresh: Bool) async throws -> [CharacterDataModel] {
         getDataCallCount += 1
         return try result.get()
     }

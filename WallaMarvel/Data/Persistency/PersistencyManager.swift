@@ -41,7 +41,7 @@ final class PersistencyManager: PersistencyManagerProtocol {
     }
 }
 
-struct PaginationModel: Codable {
+struct PaginationModel: Codable, Equatable {
     let offset: Int
     let total: Int
     let hasMoreData: Bool

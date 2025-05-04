@@ -51,6 +51,9 @@
 		DAA31E722DC6809400CF2DB1 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E712DC6809400CF2DB1 /* MockData.swift */; };
 		DAA31E752DC7A84900CF2DB1 /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E742DC7A84900CF2DB1 /* PersistencyManager.swift */; };
 		DAA31E772DC7BD9500CF2DB1 /* UIView+OnTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E762DC7BD9500CF2DB1 /* UIView+OnTap.swift */; };
+		DAA31E792DC7C67700CF2DB1 /* PersistencyManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E782DC7C67700CF2DB1 /* PersistencyManagerMock.swift */; };
+		DAA31E7D2DC7CF0600CF2DB1 /* PersistencyManagerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E7C2DC7CF0600CF2DB1 /* PersistencyManagerTestCase.swift */; };
+		DAA31ED02DC7D56700CF2DB1 /* UserDefaultsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31ECF2DC7D56700CF2DB1 /* UserDefaultsMock.swift */; };
 		DABCE5C22DC271AB00A6FA77 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */; };
 		DABCE5C62DC2727B00A6FA77 /* HeroCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */; };
 		DABCE5C82DC272C600A6FA77 /* HeroDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */; };
@@ -127,6 +130,9 @@
 		DAA31E712DC6809400CF2DB1 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		DAA31E742DC7A84900CF2DB1 /* PersistencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		DAA31E762DC7BD9500CF2DB1 /* UIView+OnTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+OnTap.swift"; sourceTree = "<group>"; };
+		DAA31E782DC7C67700CF2DB1 /* PersistencyManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistencyManagerMock.swift; sourceTree = "<group>"; };
+		DAA31E7C2DC7CF0600CF2DB1 /* PersistencyManagerTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistencyManagerTestCase.swift; sourceTree = "<group>"; };
+		DAA31ECF2DC7D56700CF2DB1 /* UserDefaultsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMock.swift; sourceTree = "<group>"; };
 		DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroCoordinator.swift; sourceTree = "<group>"; };
 		DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +218,7 @@
 		1A0E3AAE2862F7E300132FCB /* WallaMarvelTests */ = {
 			isa = PBXGroup;
 			children = (
+				DAA31E7A2DC7CED800CF2DB1 /* Data */,
 				DAA31E602DC6319100CF2DB1 /* Factories */,
 				DA6D61F42DC5171400BC5921 /* Mocks */,
 				DA6D61EF2DC5163A00BC5921 /* Scenes */,
@@ -360,6 +367,8 @@
 				DA6D61F52DC5172800BC5921 /* ListHeroesHandlerMock.swift */,
 				DA6D61F72DC51BB200BC5921 /* ListHeroesUIMock.swift */,
 				DAA31E5E2DC6312D00CF2DB1 /* GetHeroesUseCaseMock.swift */,
+				DAA31E782DC7C67700CF2DB1 /* PersistencyManagerMock.swift */,
+				DAA31ECF2DC7D56700CF2DB1 /* UserDefaultsMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -394,6 +403,22 @@
 			isa = PBXGroup;
 			children = (
 				DAA31E742DC7A84900CF2DB1 /* PersistencyManager.swift */,
+			);
+			path = Persistency;
+			sourceTree = "<group>";
+		};
+		DAA31E7A2DC7CED800CF2DB1 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DAA31E7B2DC7CEDF00CF2DB1 /* Persistency */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		DAA31E7B2DC7CEDF00CF2DB1 /* Persistency */ = {
+			isa = PBXGroup;
+			children = (
+				DAA31E7C2DC7CF0600CF2DB1 /* PersistencyManagerTestCase.swift */,
 			);
 			path = Persistency;
 			sourceTree = "<group>";
@@ -724,7 +749,10 @@
 			files = (
 				DA6D61F32DC5169200BC5921 /* ListHeroesPresenterTestCase.swift in Sources */,
 				DA6D61F62DC5172800BC5921 /* ListHeroesHandlerMock.swift in Sources */,
+				DAA31ED02DC7D56700CF2DB1 /* UserDefaultsMock.swift in Sources */,
+				DAA31E792DC7C67700CF2DB1 /* PersistencyManagerMock.swift in Sources */,
 				1A0E3AB02862F7E300132FCB /* WallaMarvelTests.swift in Sources */,
+				DAA31E7D2DC7CF0600CF2DB1 /* PersistencyManagerTestCase.swift in Sources */,
 				DAA31E5D2DC630CC00CF2DB1 /* ListHeroesHandlerTestCase.swift in Sources */,
 				DAA31E642DC634D600CF2DB1 /* CharacterModelFactory.swift in Sources */,
 				DAA31E622DC631AE00CF2DB1 /* CharacterDataContainerFactory.swift in Sources */,
