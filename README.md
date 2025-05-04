@@ -4,7 +4,7 @@ If you select a hero on the list you could see some extra details like the Comic
 
 ## Architectures
 
-<img width="956" alt="image" src="https://github.com/user-attachments/assets/787d20e3-4703-47e8-9072-fd9bd79c23a1" />
+<img width="947" alt="image" src="https://github.com/user-attachments/assets/51d2442e-da3a-4c6a-804f-722b135dff88" />
 
 This project uses MVP-C architecture to keep the same architecture as the base project. 
 
@@ -44,7 +44,7 @@ The open the .xcworkspace generated.
 
 ## Consideration and Nice-To-Have
 
-- A persistency mechanism would be nice to have for moments that there is no connection
+- For the persistency layer, UserDefaults was used for practicity, however on a bigger project a framework like CoreData or Realm should be considered.
 - A dinamic search would be nice to have to search for specific heroes that matches our query against the API
 - Snapshot testing could be nice to have to have a robust UI design
 - Use of SwiftUI, howeverm, for a smooth transition to it, a architecture change to MVVM shall be considered.
