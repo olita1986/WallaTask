@@ -103,8 +103,8 @@ final class ListHeroesPresenterTestCase: XCTestCase {
         // Then
         XCTAssertEqual(listHeroesHandlerMock.getDataCallCount, 1)
         XCTAssertEqual(listHeroesUIMock.updateCallCount, 1)
-        XCTAssertEqual(listHeroesUIMock.hidePaginationLoadingCallCount, 1)
-        XCTAssertEqual(listHeroesUIMock.showPaginationLoadingCallCount, 1)
+        XCTAssertEqual(listHeroesUIMock.showInitialLoadingCallCount, 1)
+        XCTAssertEqual(listHeroesUIMock.hideInitialLoadingCallCount, 1)
         XCTAssertEqual(listHeroesUIMock.heroes, heroes)
     }
     
@@ -125,8 +125,8 @@ final class ListHeroesPresenterTestCase: XCTestCase {
 
         // Then
         XCTAssertEqual(listHeroesHandlerMock.getDataCallCount, 1)
-        XCTAssertEqual(listHeroesUIMock.showPaginationLoadingCallCount, 1)
-        XCTAssertEqual(listHeroesUIMock.hidePaginationLoadingCallCount, 1)
+        XCTAssertEqual(listHeroesUIMock.showInitialLoadingCallCount, 1)
+        XCTAssertEqual(listHeroesUIMock.hideInitialLoadingCallCount, 1)
         XCTAssertEqual(listHeroesUIMock.showErrorCallCount, 1)
         XCTAssertEqual(listHeroesUIMock.errorMessage, "There is no more data")
     }
@@ -176,8 +176,8 @@ final class ListHeroesPresenterTestCase: XCTestCase {
         // Then
         XCTAssertEqual(listHeroesHandlerMock.getDataCallCount, 1)
         XCTAssertEqual(listHeroesUIMock.updateCallCount, 1)
-        XCTAssertEqual(listHeroesUIMock.hidePaginationLoadingCallCount, 1)
-        XCTAssertEqual(listHeroesUIMock.showPaginationLoadingCallCount, 1)
+        XCTAssertEqual(listHeroesUIMock.showInitialLoadingCallCount, 1)
+        XCTAssertEqual(listHeroesUIMock.hideInitialLoadingCallCount, 1)
         XCTAssertEqual(listHeroesUIMock.heroes, heroes)
     }
 }

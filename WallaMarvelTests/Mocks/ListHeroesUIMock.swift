@@ -11,6 +11,8 @@ import Foundation
 final class ListHeroesUIMock: ListHeroesUI {
     private(set) var showPaginationLoadingCallCount = 0
     private(set) var hidePaginationLoadingCallCount = 0
+    private(set) var showInitialLoadingCallCount = 0
+    private(set) var hideInitialLoadingCallCount = 0
     private(set) var showErrorCallCount = 0
     private(set) var showErrorPaginationCallCount = 0
     private(set) var updateCallCount = 0
@@ -28,6 +30,14 @@ final class ListHeroesUIMock: ListHeroesUI {
     
     func hidePaginationLoading() {
         hidePaginationLoadingCallCount += 1
+    }
+    
+    func showInitialLoading() {
+        showInitialLoadingCallCount += 1
+    }
+    
+    func hideInitialLoading() {
+        hideInitialLoadingCallCount += 1
     }
     
     func showError(_ error: String) {

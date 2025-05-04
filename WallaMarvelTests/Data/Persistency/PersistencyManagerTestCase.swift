@@ -35,7 +35,6 @@ final class PersistencyManagerTestCase: XCTestCase {
     func testSaveHeroesData() {
         // Given
         let data = PaginationModel(offset: 1,
-                                   total: 1,
                                    hasMoreData: true,
                                    heroes: [.make()])
         
@@ -51,7 +50,6 @@ final class PersistencyManagerTestCase: XCTestCase {
     func testLoadHeroesData_whenThereIsData_shouldReturnData() {
         // Given
         let data = PaginationModel(offset: 1,
-                                   total: 1,
                                    hasMoreData: true,
                                    heroes: [.make()])
         
@@ -79,7 +77,6 @@ final class PersistencyManagerTestCase: XCTestCase {
     func testClearCache_whenThereIsData_shoulRemoveData() {
         // Given
         let data = PaginationModel(offset: 1,
-                                   total: 1,
                                    hasMoreData: true,
                                    heroes: [.make()])
         

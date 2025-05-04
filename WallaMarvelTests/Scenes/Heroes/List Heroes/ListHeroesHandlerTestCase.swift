@@ -126,7 +126,6 @@ final class ListHeroesHandlerTestCase: XCTestCase {
         // Given
         let heroes = [CharacterDataModel.make(name: "Orlando Man")]
         let cachedData = PaginationModel(offset: 1,
-                                         total: 1,
                                          hasMoreData: true,
                                          heroes: heroes)
         persistencyManagerMock.paginationModel = cachedData
@@ -161,7 +160,6 @@ final class ListHeroesHandlerTestCase: XCTestCase {
         getHeroesUseCaseMock.result = .success(.make(characters: receivedData))
         let heroes = [CharacterDataModel.make(name: "Orlando Man")]
         let cachedData = PaginationModel(offset: 1,
-                                         total: 1,
                                          hasMoreData: true,
                                          heroes: heroes)
         persistencyManagerMock.paginationModel = cachedData
