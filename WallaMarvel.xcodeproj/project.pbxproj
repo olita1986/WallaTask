@@ -49,6 +49,8 @@
 		DAA31E6D2DC67C3F00CF2DB1 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E6C2DC67C3F00CF2DB1 /* AccessibilityIdentifiers.swift */; };
 		DAA31E6E2DC67E6200CF2DB1 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E6C2DC67C3F00CF2DB1 /* AccessibilityIdentifiers.swift */; };
 		DAA31E722DC6809400CF2DB1 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E712DC6809400CF2DB1 /* MockData.swift */; };
+		DAA31E752DC7A84900CF2DB1 /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E742DC7A84900CF2DB1 /* PersistencyManager.swift */; };
+		DAA31E772DC7BD9500CF2DB1 /* UIView+OnTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E762DC7BD9500CF2DB1 /* UIView+OnTap.swift */; };
 		DABCE5C22DC271AB00A6FA77 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */; };
 		DABCE5C62DC2727B00A6FA77 /* HeroCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */; };
 		DABCE5C82DC272C600A6FA77 /* HeroDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */; };
@@ -123,6 +125,8 @@
 		DAA31E692DC66A4600CF2DB1 /* characters_200.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = characters_200.json; sourceTree = "<group>"; };
 		DAA31E6C2DC67C3F00CF2DB1 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
 		DAA31E712DC6809400CF2DB1 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		DAA31E742DC7A84900CF2DB1 /* PersistencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
+		DAA31E762DC7BD9500CF2DB1 /* UIView+OnTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+OnTap.swift"; sourceTree = "<group>"; };
 		DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroCoordinator.swift; sourceTree = "<group>"; };
 		DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewController.swift; sourceTree = "<group>"; };
@@ -260,6 +264,7 @@
 		1A821EC72862FD6E0024D397 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				DAA31E732DC7A83200CF2DB1 /* Persistency */,
 				DAA31E682DC66A3900CF2DB1 /* Stubs */,
 				1A821ED5286305590024D397 /* MarvelDataSource.swift */,
 				1A821EC82862FE3C0024D397 /* APIClient.swift */,
@@ -319,6 +324,7 @@
 			children = (
 				DA6D61E92DC5058700BC5921 /* UIViewController+Alert.swift */,
 				DA6D61EB2DC506B000BC5921 /* UITableView+Pagination.swift */,
+				DAA31E762DC7BD9500CF2DB1 /* UIView+OnTap.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -382,6 +388,14 @@
 				DAA31E6C2DC67C3F00CF2DB1 /* AccessibilityIdentifiers.swift */,
 			);
 			path = Accessibility;
+			sourceTree = "<group>";
+		};
+		DAA31E732DC7A83200CF2DB1 /* Persistency */ = {
+			isa = PBXGroup;
+			children = (
+				DAA31E742DC7A84900CF2DB1 /* PersistencyManager.swift */,
+			);
+			path = Persistency;
 			sourceTree = "<group>";
 		};
 		DABCE5C02DC2719300A6FA77 /* Utilities */ = {
@@ -680,6 +694,7 @@
 				DA6D61E22DC3AA3500BC5921 /* ComicResponseDataModel.swift in Sources */,
 				1A7B9BBD286D81AA00EBC1A6 /* CharacterDataModel.swift in Sources */,
 				1A0E3A992862F7E200132FCB /* AppDelegate.swift in Sources */,
+				DAA31E752DC7A84900CF2DB1 /* PersistencyManager.swift in Sources */,
 				DA6D61EC2DC506B000BC5921 /* UITableView+Pagination.swift in Sources */,
 				DA6D61EE2DC50ABE00BC5921 /* ListHeroesHandler.swift in Sources */,
 				DABCE5C62DC2727B00A6FA77 /* HeroCoordinator.swift in Sources */,
@@ -695,6 +710,7 @@
 				1A3B7326286ADD1E007BF626 /* ListHeroesTableView.swift in Sources */,
 				1A3B7328286ADEE6007BF626 /* ListHeroesTableViewCell.swift in Sources */,
 				DA6D61E42DC3B80600BC5921 /* ComicTableViewCell.swift in Sources */,
+				DAA31E772DC7BD9500CF2DB1 /* UIView+OnTap.swift in Sources */,
 				1A821ED4286302EC0024D397 /* CharacterResponseDataModel.swift in Sources */,
 				DABCE5C82DC272C600A6FA77 /* HeroDetailViewController.swift in Sources */,
 				1A821EC92862FE3C0024D397 /* APIClient.swift in Sources */,

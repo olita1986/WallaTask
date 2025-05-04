@@ -67,7 +67,9 @@ extension ListHeroesViewController: ListHeroesUI {
     }
     
     func showErrorPagination(_ error: String) {
-        mainView.heroesTableView.showPaginationError(message: error)
+        mainView.heroesTableView.showPaginationError(message: error) { [weak self] in
+            self?.presenter?.getHeroes(initialHeroes: false, forceRefresh: false)
+        }
     }
 }
 
