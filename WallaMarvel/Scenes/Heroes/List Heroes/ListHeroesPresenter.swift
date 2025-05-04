@@ -3,7 +3,7 @@ import Foundation
 protocol ListHeroesPresenterProtocol: AnyObject {
     var ui: ListHeroesUI? { get set }
     func screenTitle() -> String
-    func getHeroes(initialHeroes: Bool)
+    func getHeroes(initialHeroes: Bool,  forceRefresh: Bool)
     func showHeroDetail(forHero hero: CharacterDataModel)
     func setupSearchMode(isSearching: Bool)
 }
@@ -41,7 +41,7 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
     
     // MARK: UseCases
     
-    func getHeroes(initialHeroes: Bool) {
+    func getHeroes(initialHeroes: Bool, forceRefresh: Bool) {
         // Avoid extra calls if it's fetching, and isSearching
         guard !isFetching, !isSearching else { return }
         isFetching = true
@@ -49,7 +49,8 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
         Task {
             do {
                 // Get data
-                let heroes = try await listHeroeHandler.getData(initialHeroes: initialHeroes)
+                let heroes = try await listHeroeHandler.getData(initialHeroes: initialHeroes,
+                                                                forceRefresh: forceRefresh)
 
                 await MainActor.run {
                     isFetching = false

@@ -1,6 +1,6 @@
 import Foundation
 
-struct Thumbnail: Decodable, Equatable {
+struct Thumbnail: Codable, Equatable {
     let path: String
     let `extension`: String
     

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ListHeroesHandlerProtocol {
-    func getData(initialHeroes: Bool) async throws -> [CharacterDataModel]
+    func getData(initialHeroes: Bool, forceRefresh: Bool) async throws -> [CharacterDataModel]
 }
 
 final class ListHeroesHandler: ListHeroesHandlerProtocol {
@@ -18,16 +18,29 @@ final class ListHeroesHandler: ListHeroesHandlerProtocol {
     private var hasMoreHeroes = true
     
     private let getHeroesUseCase: GetHeroesUseCaseProtocol
+    private let persistencyManager: PersistencyManagerProtocol
 
-    init(getHeroesUseCase: GetHeroesUseCaseProtocol = GetHeroes()) {
+    init(getHeroesUseCase: GetHeroesUseCaseProtocol = GetHeroes(),
+         persistencyManager: PersistencyManagerProtocol = PersistencyManager()) {
         self.getHeroesUseCase = getHeroesUseCase
+        self.persistencyManager = persistencyManager
     }
     
-    func getData(initialHeroes: Bool) async throws -> [CharacterDataModel] {
+    func getData(initialHeroes: Bool, forceRefresh: Bool) async throws -> [CharacterDataModel] {
         // If we are fetching initial heroes then we reset offset and hasMoreHeroes
         if initialHeroes {
             currentOffset = 0
             hasMoreHeroes = true
+            if !forceRefresh {
+                if let heroesData = persistencyManager.loadHeroesData() {
+                    currentOffset = heroesData.offset
+                    hasMoreHeroes = heroesData.hasMoreData
+                    heroes = heroesData.heroes
+                    return heroes
+                }
+            } else {
+                persistencyManager.clearCache()
+            }
         }
         
         // If there is no more heroes to load show a message
@@ -47,8 +60,16 @@ final class ListHeroesHandler: ListHeroesHandlerProtocol {
         } else {
             heroes += characterDataContainer.characters
         }
-
+        saveHeroesData()
         return heroes
+    }
+    
+    func saveHeroesData() {
+        let paginationModel = PaginationModel(offset: currentOffset,
+                                              total: 0,
+                                              hasMoreData: hasMoreHeroes,
+                                              heroes: heroes)
+        persistencyManager.saveHeroesData(heroesData: paginationModel)
     }
 }
 

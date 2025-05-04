@@ -20,7 +20,7 @@ final class ListHeroesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         listHeroesProvider = ListHeroesProvider(tableView: mainView.heroesTableView)
-        presenter?.getHeroes(initialHeroes: true)
+        presenter?.getHeroes(initialHeroes: true, forceRefresh: false)
         presenter?.ui = self
         
         title = presenter?.screenTitle()
@@ -42,7 +42,7 @@ final class ListHeroesViewController: UIViewController {
     private func setupBindings() {
         mainView.refreshPublisher
             .sink { [weak self] in
-                self?.presenter?.getHeroes(initialHeroes: true)
+                self?.presenter?.getHeroes(initialHeroes: true, forceRefresh: true)
             }
             .store(in: &cancellables)
     }
@@ -81,7 +81,7 @@ extension ListHeroesViewController: UITableViewDelegate {
         guard let heroCount = listHeroesProvider?.heroes.count,
               indexPath.row == heroCount - 2 else { return }
         
-        presenter?.getHeroes(initialHeroes: false)
+        presenter?.getHeroes(initialHeroes: false, forceRefresh: false)
     }
 }
 
