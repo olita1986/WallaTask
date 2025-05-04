@@ -8,7 +8,7 @@ protocol MarvelDataSourceProtocol {
 final class MarvelDataSource: MarvelDataSourceProtocol {
     private let apiClient: APIClientProtocol
     
-    init(apiClient: APIClientProtocol = APIClient()) {
+    init(apiClient: APIClientProtocol = APIClient.shared) {
         self.apiClient = apiClient
     }
     

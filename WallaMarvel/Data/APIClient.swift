@@ -7,6 +7,9 @@ protocol APIClientProtocol {
 }
 
 final class APIClient: APIClientProtocol {
+    
+    static let shared = APIClient()
+
     private enum Constant {
         static let privateKey = "bfb693b074fe878aae4de08d3a69142789875b1c"
         static let publicKey = "428d83e6ad1718e08d61ee45dacca712"

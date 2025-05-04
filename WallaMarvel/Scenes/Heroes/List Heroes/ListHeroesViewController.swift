@@ -7,7 +7,7 @@ final class ListHeroesViewController: UIViewController {
     var mainView: ListHeroesView { return view as! ListHeroesView  }
     
     var presenter: ListHeroesPresenterProtocol?
-    var listHeroesProvider: ListHeroesAdapter?
+    var listHeroesProvider: ListHeroesProvider?
     
     // MARK: - Private Properties
     private let searchController = UISearchController(searchResultsController: nil)
@@ -19,7 +19,7 @@ final class ListHeroesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        listHeroesProvider = ListHeroesAdapter(tableView: mainView.heroesTableView)
+        listHeroesProvider = ListHeroesProvider(tableView: mainView.heroesTableView)
         presenter?.getHeroes(initialHeroes: true)
         presenter?.ui = self
         
