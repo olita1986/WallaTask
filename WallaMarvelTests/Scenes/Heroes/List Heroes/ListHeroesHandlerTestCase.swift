@@ -165,7 +165,7 @@ final class ListHeroesHandlerTestCase: XCTestCase {
         persistencyManagerMock.paginationModel = cachedData
 
         // When
-        let data = try await sut.getData(initialHeroes: true, forceRefresh: true)
+        let data = try await sut.getData(initialHeroes: false, forceRefresh: true)
         
         // Then
         XCTAssertEqual(data, receivedData)
