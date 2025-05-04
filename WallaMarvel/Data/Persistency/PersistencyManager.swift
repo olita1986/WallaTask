@@ -14,7 +14,7 @@ protocol PersistencyManagerProtocol: AnyObject {
 }
 
 final class PersistencyManager: PersistencyManagerProtocol {
-    private enum Keys {
+    enum Keys {
         static let heroesKey = "HeroesData"
     }
     private let userDefaults: UserDefaults
@@ -43,16 +43,13 @@ final class PersistencyManager: PersistencyManagerProtocol {
 
 struct PaginationModel: Codable, Equatable {
     let offset: Int
-    let total: Int
     let hasMoreData: Bool
     let heroes: [CharacterDataModel]
     
     init(offset: Int,
-         total: Int,
          hasMoreData: Bool,
          heroes: [CharacterDataModel]) {
         self.offset = offset
-        self.total = total
         self.hasMoreData = hasMoreData
         self.heroes = heroes
     }

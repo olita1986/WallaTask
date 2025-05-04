@@ -27,10 +27,11 @@ final class ListHeroesHandler: ListHeroesHandlerProtocol {
     }
     
     func getData(initialHeroes: Bool, forceRefresh: Bool) async throws -> [CharacterDataModel] {
-        // If we are fetching initial heroes then we reset offset and hasMoreHeroes
-        if initialHeroes {
+        // If we are fetching initial heroes or force refresh then we reset offset and hasMoreHeroes
+        if initialHeroes || forceRefresh {
             currentOffset = 0
             hasMoreHeroes = true
+            // If we are not forcing refresh then we get the cached data
             if !forceRefresh {
                 if let heroesData = persistencyManager.loadHeroesData() {
                     currentOffset = heroesData.offset
@@ -54,8 +55,8 @@ final class ListHeroesHandler: ListHeroesHandlerProtocol {
         currentOffset += characterDataContainer.count
         // Check if there is more heroes to load
         hasMoreHeroes = currentOffset < characterDataContainer.total
-        // If it's initial load then replace the entire heroes else append then
-        if initialHeroes {
+        // If it's initial load or force refresh then replace the entire heroes else append then
+        if initialHeroes || forceRefresh {
             heroes = characterDataContainer.characters
         } else {
             heroes += characterDataContainer.characters
@@ -66,7 +67,6 @@ final class ListHeroesHandler: ListHeroesHandlerProtocol {
     
     func saveHeroesData() {
         let paginationModel = PaginationModel(offset: currentOffset,
-                                              total: 0,
                                               hasMoreData: hasMoreHeroes,
                                               heroes: heroes)
         persistencyManager.saveHeroesData(heroesData: paginationModel)

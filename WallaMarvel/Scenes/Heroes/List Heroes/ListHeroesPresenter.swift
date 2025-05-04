@@ -9,6 +9,8 @@ protocol ListHeroesPresenterProtocol: AnyObject {
 }
 
 protocol ListHeroesUI: AnyObject {
+    func showInitialLoading()
+    func hideInitialLoading()
     func showPaginationLoading()
     func hidePaginationLoading()
     func showError(_ error: String)
@@ -45,7 +47,11 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
         // Avoid extra calls if it's fetching, and isSearching
         guard !isFetching, !isSearching else { return }
         isFetching = true
-        ui?.showPaginationLoading()
+        if initialHeroes || forceRefresh {
+            ui?.showInitialLoading()
+        } else {
+            ui?.showPaginationLoading()
+        }
         Task {
             do {
                 // Get data
@@ -55,15 +61,17 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
                 await MainActor.run {
                     isFetching = false
                     ui?.hidePaginationLoading()
+                    ui?.hideInitialLoading()
                     ui?.update(heroes: heroes)
                 }
             } catch {
                 await MainActor.run {
                     isFetching = false
-                    ui?.hidePaginationLoading()
-                    if initialHeroes {
+                    if initialHeroes || forceRefresh {
+                        ui?.hideInitialLoading()
                         ui?.showError(error.localizedDescription)
                     } else {
+                        ui?.hidePaginationLoading()
                         ui?.showErrorPagination(error.localizedDescription)
                     }
                 }

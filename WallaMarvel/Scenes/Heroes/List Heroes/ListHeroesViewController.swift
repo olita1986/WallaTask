@@ -20,8 +20,8 @@ final class ListHeroesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         listHeroesProvider = ListHeroesProvider(tableView: mainView.heroesTableView)
-        presenter?.getHeroes(initialHeroes: true, forceRefresh: false)
         presenter?.ui = self
+        presenter?.getHeroes(initialHeroes: true, forceRefresh: false)
         
         title = presenter?.screenTitle()
         
@@ -42,13 +42,21 @@ final class ListHeroesViewController: UIViewController {
     private func setupBindings() {
         mainView.refreshPublisher
             .sink { [weak self] in
-                self?.presenter?.getHeroes(initialHeroes: true, forceRefresh: true)
+                self?.presenter?.getHeroes(initialHeroes: false, forceRefresh: true)
             }
             .store(in: &cancellables)
     }
 }
 
 extension ListHeroesViewController: ListHeroesUI {
+    func showInitialLoading() {
+        mainView.heroesTableView.showLoading(loadingText: "Loading Heroes")
+    }
+    
+    func hideInitialLoading() {
+        mainView.heroesTableView.hideLoading()
+    }
+
     func showPaginationLoading() {
         mainView.heroesTableView.showPaginationLoading()
     }

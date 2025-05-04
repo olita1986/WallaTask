@@ -54,6 +54,7 @@
 		DAA31E792DC7C67700CF2DB1 /* PersistencyManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E782DC7C67700CF2DB1 /* PersistencyManagerMock.swift */; };
 		DAA31E7D2DC7CF0600CF2DB1 /* PersistencyManagerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31E7C2DC7CF0600CF2DB1 /* PersistencyManagerTestCase.swift */; };
 		DAA31ED02DC7D56700CF2DB1 /* UserDefaultsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31ECF2DC7D56700CF2DB1 /* UserDefaultsMock.swift */; };
+		DAA31ED22DC7D9D600CF2DB1 /* UITableView+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA31ED12DC7D9D600CF2DB1 /* UITableView+Loading.swift */; };
 		DABCE5C22DC271AB00A6FA77 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */; };
 		DABCE5C62DC2727B00A6FA77 /* HeroCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */; };
 		DABCE5C82DC272C600A6FA77 /* HeroDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */; };
@@ -133,6 +134,7 @@
 		DAA31E782DC7C67700CF2DB1 /* PersistencyManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistencyManagerMock.swift; sourceTree = "<group>"; };
 		DAA31E7C2DC7CF0600CF2DB1 /* PersistencyManagerTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistencyManagerTestCase.swift; sourceTree = "<group>"; };
 		DAA31ECF2DC7D56700CF2DB1 /* UserDefaultsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMock.swift; sourceTree = "<group>"; };
+		DAA31ED12DC7D9D600CF2DB1 /* UITableView+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Loading.swift"; sourceTree = "<group>"; };
 		DABCE5C12DC271AB00A6FA77 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		DABCE5C52DC2727B00A6FA77 /* HeroCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroCoordinator.swift; sourceTree = "<group>"; };
 		DABCE5C72DC272C600A6FA77 /* HeroDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewController.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				DA6D61E92DC5058700BC5921 /* UIViewController+Alert.swift */,
 				DA6D61EB2DC506B000BC5921 /* UITableView+Pagination.swift */,
 				DAA31E762DC7BD9500CF2DB1 /* UIView+OnTap.swift */,
+				DAA31ED12DC7D9D600CF2DB1 /* UITableView+Loading.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -739,6 +742,7 @@
 				1A821ED4286302EC0024D397 /* CharacterResponseDataModel.swift in Sources */,
 				DABCE5C82DC272C600A6FA77 /* HeroDetailViewController.swift in Sources */,
 				1A821EC92862FE3C0024D397 /* APIClient.swift in Sources */,
+				DAA31ED22DC7D9D600CF2DB1 /* UITableView+Loading.swift in Sources */,
 				DABCE5C22DC271AB00A6FA77 /* BaseCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
