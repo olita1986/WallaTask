@@ -14,6 +14,8 @@ protocol HeroDetailPresenterProtocol: AnyObject {
 }
 
 protocol ComicsUI: AnyObject {
+    func showLoading()
+    func hideLoading()
     func update(comics: [ComicDataModel])
 }
 final class HeroDetailPresenter: HeroDetailPresenterProtocol {
@@ -32,14 +34,18 @@ final class HeroDetailPresenter: HeroDetailPresenterProtocol {
     }
     
     func getComics() {
+        ui?.showLoading()
         Task {
             do {
                 let comicsContainer = try await getComicsUseCase.execute(forHeroId: hero.id)
                 await MainActor.run {
-                    self.ui?.update(comics: comicsContainer.comics)
+                    ui?.hideLoading()
+                    ui?.update(comics: comicsContainer.comics)
                 }
             } catch {
-                print(error.localizedDescription)
+                await MainActor.run {
+                    ui?.hideLoading()
+                }
             }
         }
     }

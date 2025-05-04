@@ -108,6 +108,14 @@ final class HeroDetailViewController: UIViewController {
 }
 
 extension HeroDetailViewController: ComicsUI {
+    func showLoading() {
+        comicsTableView.showLoading(loadingText: "Loading Comics")
+    }
+    
+    func hideLoading() {
+        comicsTableView.hideLoading()
+    }
+    
     func update(comics: [ComicDataModel]) {
         self.comics = comics
     }
