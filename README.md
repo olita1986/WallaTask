@@ -45,11 +45,31 @@ The open the .xcworkspace generated.
 ## Consideration and Nice-To-Have
 
 - For the persistency layer, UserDefaults was used for practicity, however on a bigger project a framework like CoreData or Realm should be considered.
-- A dinamic search would be nice to have to search for specific heroes that matches our query against the API
 - Snapshot testing could be nice to have to have a robust UI design
-- Use of SwiftUI, howeverm, for a smooth transition to it, a architecture change to MVVM shall be considered.
+- Use of SwiftUI, however, for a smooth transition to it, an architecture change to MVVM should be considered.
 
 ## API
 
 The API used for Marvel Heroes: http://developer.marvel.com/
+
+## Demo
+
+### Pagination
+
+![Pagination](https://github.com/user-attachments/assets/9f44e4f7-cd69-4209-bd09-7c9ec62593e1)
+
+### Heroe Search
+
+![Search](https://github.com/user-attachments/assets/de95bc75-161d-4079-a86a-1330d21fd301)
+
+### Detail View (Not the most beatiful one 😂)
+
+![Detail](https://github.com/user-attachments/assets/8826541e-748a-4f26-b303-d7ff3c301f1e)
+
+### Persistency
+
+![Persistency](https://github.com/user-attachments/assets/5ab8454f-895a-462e-8151-4b752e932674)
+
+
+
  
