@@ -56,7 +56,7 @@ The API used for Marvel Heroes: http://developer.marvel.com/
 - Pagination And Try again in case of error
 - Dynamic Search
 - Pull to refresh
-- Persistency 
+- Persistency (It also keeps the offset so you can keep paginating from the cached list)
 
 ## Demo
 
