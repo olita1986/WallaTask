@@ -50,20 +50,12 @@ final class ListHeroesProvider: NSObject, UITableViewDataSource {
     }
 
     // MARK: - Public Methods
-
-    func searchHeroe(withText text: String?) {
-        if let text, !text.isEmpty {
-            filteredHeroes = heroes.filter {
-                $0.name.lowercased().contains(text.lowercased())
-            }
-        } else {
-            resetFilter()
-        }
-    }
     
-    // MARK: - Private Methods
+    func updateFoundHeroes(heroes: [CharacterDataModel]) {
+        filteredHeroes = heroes
+    }
 
-    private func resetFilter() {
+    func resetFilter() {
         filteredHeroes = heroes
     }
 }

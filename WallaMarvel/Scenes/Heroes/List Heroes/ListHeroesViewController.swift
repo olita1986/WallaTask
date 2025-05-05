@@ -49,6 +49,14 @@ final class ListHeroesViewController: UIViewController {
 }
 
 extension ListHeroesViewController: ListHeroesUI {
+    func updateFromSearch(heroes: [CharacterDataModel]) {
+        listHeroesProvider?.updateFoundHeroes(heroes: heroes)
+    }
+
+    func resetResults() {
+        listHeroesProvider?.resetFilter()
+    }
+
     func showInitialLoading() {
         mainView.heroesTableView.showLoading(loadingText: "Loading Heroes")
     }
@@ -98,7 +106,7 @@ extension ListHeroesViewController: UITableViewDelegate {
 extension ListHeroesViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         let searchText = searchController.searchBar.text
-        listHeroesProvider?.searchHeroe(withText: searchText)
+        presenter?.searchHero(withText: searchText)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

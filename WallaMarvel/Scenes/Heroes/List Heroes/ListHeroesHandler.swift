@@ -9,6 +9,7 @@ import Foundation
 
 protocol ListHeroesHandlerProtocol {
     func getData(initialHeroes: Bool, forceRefresh: Bool) async throws -> [CharacterDataModel]
+    func getRequestedHeroes(withText text: String?) async throws -> [CharacterDataModel]
 }
 
 final class ListHeroesHandler: ListHeroesHandlerProtocol {
@@ -50,7 +51,7 @@ final class ListHeroesHandler: ListHeroesHandlerProtocol {
         }
 
         // Get data
-        let characterDataContainer = try await getHeroesUseCase.execute(offset: currentOffset, limit: limit)
+        let characterDataContainer = try await getHeroesUseCase.execute(offset: currentOffset, limit: limit, searchQuery: nil)
         // Increase the offset
         currentOffset += characterDataContainer.count
         // Check if there is more heroes to load
@@ -65,7 +66,13 @@ final class ListHeroesHandler: ListHeroesHandlerProtocol {
         return heroes
     }
     
-    func saveHeroesData() {
+    func getRequestedHeroes(withText text: String?) async throws -> [CharacterDataModel] {
+        let requestedHeroes = try await getHeroesUseCase.execute(offset: 0, limit: 10, searchQuery: text)
+        
+        return requestedHeroes.characters
+    }
+    
+    private func saveHeroesData() {
         let paginationModel = PaginationModel(offset: currentOffset,
                                               hasMoreData: hasMoreHeroes,
                                               heroes: heroes)
