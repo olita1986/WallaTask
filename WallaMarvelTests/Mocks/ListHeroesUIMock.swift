@@ -16,11 +16,14 @@ final class ListHeroesUIMock: ListHeroesUI {
     private(set) var showErrorCallCount = 0
     private(set) var showErrorPaginationCallCount = 0
     private(set) var updateCallCount = 0
+    private(set) var updateFromSearchCallCount = 0
+    private(set) var resetResultsCallCount = 0
     private(set) var errorMessage = ""
     
     private(set) var heroes = [CharacterDataModel]()
     
     var updateHeroesCompletion: (() -> Void)?
+    var updateFromSearchCompletion: (() -> Void)?
     var showErrorPaginationCompletion: (() -> Void)?
     var showErrorCompletion: (() -> Void)?
 
@@ -56,5 +59,15 @@ final class ListHeroesUIMock: ListHeroesUI {
         defer { updateHeroesCompletion?() }
         self.heroes = heroes
         updateCallCount += 1
+    }
+    
+    func updateFromSearch(heroes: [WallaMarvel.CharacterDataModel]) {
+        defer { updateFromSearchCompletion?() }
+        updateFromSearchCallCount += 1
+        self.heroes = heroes
+    }
+    
+    func resetResults() {
+        resetResultsCallCount += 1
     }
 }

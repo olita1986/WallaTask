@@ -173,4 +173,33 @@ final class ListHeroesHandlerTestCase: XCTestCase {
         XCTAssertEqual(getHeroesUseCaseMock.executeCallCount, 1)
         XCTAssertNil(persistencyManagerMock.paginationModel)
     }
+    
+    // MARK: - Get Requested Heroes
+    
+    func testGetRequestHeroes_whenSuccessful_shouldReturnHeroes() async throws {
+        // Given
+        let receivedData = [CharacterDataModel.make()]
+        getHeroesUseCaseMock.result = .success(.make(characters: receivedData))
+
+        // When
+        let requestedHeroes = try await sut.getRequestedHeroes(withText: "Spider")
+        
+        // Then
+        XCTAssertEqual(requestedHeroes, receivedData)
+        XCTAssertEqual(getHeroesUseCaseMock.executeCallCount, 1)
+    }
+    
+    func testGetRequestHeroes_whenError_shouldReturnError() async {
+        // Given
+        getHeroesUseCaseMock.result = .failure(NetworkError.invalidResponse)
+
+        // When
+        do {
+            _ = try await sut.getRequestedHeroes(withText: "Spider")
+        } catch {
+            // Then
+            XCTAssertTrue(error is NetworkError)
+            XCTAssertEqual(getHeroesUseCaseMock.executeCallCount, 1)
+        }
+    }
 }

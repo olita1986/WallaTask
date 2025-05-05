@@ -84,36 +84,46 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
     }
     
     func searchHero(withText text: String?) {
+        // Trim all white spaces and lines
         let searchText = text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        // Check if there is text or if it is empty
         guard let searchText, !searchText.isEmpty else {
+            // Else reset the results and cancel the task
             ui?.resetResults()
             searchTask?.cancel()
             return
         }
 
+        // Cancel any previous task to avoid repeating calls
         searchTask?.cancel()
         
         searchTask = Task {
             do {
+                // Debounce the call for 0.5 seconds
                 try await Task.sleep(nanoseconds: UInt64(0.5) * 1_000_000_000)
             } catch {
                 return
             }
             
+            // Check that the task is not being cancelled
             guard !Task.isCancelled else {
                 return
             }
 
             do {
+                // Make hero request
                 let requestedHeroes = try await listHeroeHandler.getRequestedHeroes(withText: searchText)
                 await MainActor.run {
+                    // If the result is empty show an error
                     if requestedHeroes.isEmpty {
                         ui?.showError("No heroes found. Try with another query")
                     } else {
+                        // Else show results
                         ui?.updateFromSearch(heroes: requestedHeroes)
                     }
                 }
             } catch {
+                // If error is not because of Task Cancellation then show error
                 if !(error.localizedDescription == "cancelled") {
                     await MainActor.run {
                         ui?.showError(error.localizedDescription)

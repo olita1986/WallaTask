@@ -11,7 +11,8 @@ import Foundation
 final class GetHeroesUseCaseMock: GetHeroesUseCaseProtocol {
     private(set) var executeCallCount = 0
     var result: Result<CharacterDataContainer, Error> = .success(.make())
-    func execute(offset: Int, limit: Int) async throws -> CharacterDataContainer {
+    
+    func execute(offset: Int, limit: Int,  searchQuery: String?) async throws -> CharacterDataContainer {
         executeCallCount += 1
         return try result.get()
     }

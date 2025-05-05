@@ -180,4 +180,121 @@ final class ListHeroesPresenterTestCase: XCTestCase {
         XCTAssertEqual(listHeroesUIMock.hideInitialLoadingCallCount, 1)
         XCTAssertEqual(listHeroesUIMock.heroes, heroes)
     }
+    
+    // MARK: - Search Heroes
+    
+    func testSearchHero_whenSuccess_shouldReturnRequestedHeroes() {
+        // Given
+        let expectation = expectation(description: "Should receive requested heroes")
+        let heroes = [CharacterDataModel(id: 1234,
+                                         name: "Orlando",
+                                         thumbnail: Thumbnail(path: "",
+                                                              extension: ""))]
+        listHeroesHandlerMock.result = .success(heroes)
+        listHeroesUIMock.updateFromSearchCompletion = {
+            expectation.fulfill()
+        }
+
+        // When
+        sut.searchHero(withText: "Orlando")
+        
+        waitForExpectations(timeout: 1)
+        
+        // Then
+        XCTAssertEqual(listHeroesHandlerMock.getRequestedHeroesCallCount, 1)
+        XCTAssertEqual(listHeroesUIMock.updateFromSearchCallCount, 1)
+        XCTAssertEqual(listHeroesUIMock.heroes, heroes)
+    }
+    
+    func testSearchHero_whenSuccessButEmptyHeroes_shouldShowError() {
+        // Given
+        let expectation = expectation(description: "Should show error")
+        let heroes = [CharacterDataModel]()
+        listHeroesHandlerMock.result = .success(heroes)
+        listHeroesUIMock.showErrorCompletion = {
+            expectation.fulfill()
+        }
+
+        // When
+        sut.searchHero(withText: "Orlando")
+        
+        waitForExpectations(timeout: 1)
+        
+        // Then
+        XCTAssertEqual(listHeroesHandlerMock.getRequestedHeroesCallCount, 1)
+        XCTAssertEqual(listHeroesUIMock.showErrorCallCount, 1)
+    }
+    
+    func testSearchHero_whenSuccessAndDebounce_shouldReturnRequestedHeroesOnce() {
+        // Given
+        let expectation = expectation(description: "Should receive requested heroes")
+        let heroes = [CharacterDataModel(id: 1234,
+                                         name: "Orlando",
+                                         thumbnail: Thumbnail(path: "",
+                                                              extension: ""))]
+        listHeroesHandlerMock.result = .success(heroes)
+        listHeroesUIMock.updateFromSearchCompletion = {
+            expectation.fulfill()
+        }
+
+        // When
+        sut.searchHero(withText: "Orl")
+        sut.searchHero(withText: "Orlan")
+        
+        waitForExpectations(timeout: 2)
+        
+        // Then
+        XCTAssertEqual(listHeroesHandlerMock.getRequestedHeroesCallCount, 1)
+        XCTAssertEqual(listHeroesHandlerMock.searchText, "Orlan")
+        XCTAssertEqual(listHeroesUIMock.updateFromSearchCallCount, 1)
+        XCTAssertEqual(listHeroesUIMock.heroes, heroes)
+    }
+    
+    func testSearchHero_whenEmptyString_shouldResetHeroes() {
+        // Given
+        let heroes = [CharacterDataModel(id: 1234,
+                                         name: "Orlando",
+                                         thumbnail: Thumbnail(path: "",
+                                                              extension: ""))]
+        listHeroesHandlerMock.result = .success(heroes)
+
+        // When
+        sut.searchHero(withText: "")
+        
+        // Then
+        XCTAssertEqual(listHeroesHandlerMock.getRequestedHeroesCallCount, 0)
+        XCTAssertEqual(listHeroesUIMock.resetResultsCallCount, 1)
+    }
+    
+    func testSearchHero_whenStringNil_shouldResetHeroes() {
+        // Given
+        let heroes = [CharacterDataModel(id: 1234,
+                                         name: "Orlando",
+                                         thumbnail: Thumbnail(path: "",
+                                                              extension: ""))]
+        listHeroesHandlerMock.result = .success(heroes)
+
+        // When
+        sut.searchHero(withText: nil)
+        
+        // Then
+        XCTAssertEqual(listHeroesHandlerMock.getRequestedHeroesCallCount, 0)
+        XCTAssertEqual(listHeroesUIMock.resetResultsCallCount, 1)
+    }
+    
+    func testSearchHero_whenSearchingAndDeleting_shouldNot() {
+        // Given
+        let heroes = [CharacterDataModel(id: 1234,
+                                         name: "Orlando",
+                                         thumbnail: Thumbnail(path: "",
+                                                              extension: ""))]
+        listHeroesHandlerMock.result = .success(heroes)
+
+        // When
+        sut.searchHero(withText: nil)
+        
+        // Then
+        XCTAssertEqual(listHeroesHandlerMock.getRequestedHeroesCallCount, 0)
+        XCTAssertEqual(listHeroesUIMock.resetResultsCallCount, 1)
+    }
 }
