@@ -23,5 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if ProcessInfo.processInfo.arguments.contains("ENABLE_STUBS_ERROR") {
             mockData.setupErrorStubs()
         }
+
+        if ProcessInfo.processInfo.arguments.contains("REMOVE_PERSISTENCY") {
+            UserDefaults.standard.removeObject(forKey: PersistencyManager.Keys.heroesKey)
+        }
     }
 }

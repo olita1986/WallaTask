@@ -3,14 +3,22 @@ import XCTest
 
 class WallaMarvelUITests: XCTestCase {
 
+    private var app: XCUIApplication!
+
     override func setUp()  {
         super.setUp()
         continueAfterFailure = false
+        app = XCUIApplication()
+        app.launchArguments = ["REMOVE_PERSISTENCY"]
+    }
+
+    override func tearDown() {
+        app = nil
+        super.tearDown()
     }
 
     func testLoadHeroes_whenSuccess_shouldShowHeroes() {
-        let app = XCUIApplication()
-        app.launchArguments = ["ENABLE_STUBS"]
+        app.launchArguments += ["ENABLE_STUBS"]
         app.launch()
         let tableView = app.tables[AccessibilityIdentifiers.HeroList.heroeTableView]
         
@@ -28,8 +36,7 @@ class WallaMarvelUITests: XCTestCase {
     }
 
     func testLoadHeroes_whenTapOnHero_shouldShowDetailView() {
-        let app = XCUIApplication()
-        app.launchArguments = ["ENABLE_STUBS"]
+        app.launchArguments += ["ENABLE_STUBS"]
         app.launch()
         let tableView = app.tables[AccessibilityIdentifiers.HeroList.heroeTableView]
         
@@ -54,8 +61,7 @@ class WallaMarvelUITests: XCTestCase {
     }
     
     func testLoadHeroes_whenError_shouldShowAlert() {
-        let app = XCUIApplication()
-        app.launchArguments = ["ENABLE_STUBS_ERROR"]
+        app.launchArguments += ["ENABLE_STUBS_ERROR"]
         app.launch()
         
         let alertView = app.alerts[AccessibilityIdentifiers.General.alert]
