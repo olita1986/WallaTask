@@ -52,6 +52,12 @@ The open the .xcworkspace generated.
 
 The API used for Marvel Heroes: http://developer.marvel.com/
 
+## App Features
+- Pagination And Try again in case of error
+- Dynamic Search
+- Pull to refresh
+- Persistency 
+
 ## Demo
 
 ### Pagination
