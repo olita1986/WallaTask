@@ -59,7 +59,6 @@ Finally, open the .xcworkspace generated.
 - For the persistency layer, UserDefaults was used for practicity, however on a bigger project a framework like CoreData or Realm should be considered.
 - Snapshot testing could be nice to have to have a robust UI design
 - Use of SwiftUI, however, for a smooth transition to it, an architecture change to MVVM should be considered.
-- For simplicity the private and public key was hardcoded. However, for a better security, a server could send an access token for the request. Another option could be using cocoapods-keys (I got some problems with settings Gem file and running it). Another option could be using a xcconfig file and distributed between developers.
 
 ## API
 
