@@ -5,6 +5,15 @@ target 'WallaMarvel' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
+  plugin 'cocoapods-keys', {
+    :project => "WallaMarvel",
+    :target => "WallaMarvel",
+    :keys => [
+      "PrivateApiKey",
+      "PublicApiKey",
+    ]
+  }
+
   # Pods for WallaMarvel
   pod 'Kingfisher', '~> 8.3'
   pod 'OHHTTPStubs/Swift', '~> 9.1.0'

@@ -1,4 +1,5 @@
 import Foundation
+import Keys
 
 protocol APIClientProtocol {
     func makeRequest<T: Decodable>(model: T.Type,
@@ -10,10 +11,7 @@ final class APIClient: APIClientProtocol {
     
     static let shared = APIClient()
 
-    private enum Constant {
-        static let privateKey = "bfb693b074fe878aae4de08d3a69142789875b1c"
-        static let publicKey = "428d83e6ad1718e08d61ee45dacca712"
-    }
+    private let keys = WallaMarvelKeys()
     
     private let urlSession: URLSession
     private let baseURLString = "https://gateway.marvel.com/v1/public"
@@ -46,8 +44,8 @@ final class APIClient: APIClientProtocol {
     
     private func createURL(endpoint: String, parameters: [String : String]?) -> URL? {
         let ts = String(Int(Date().timeIntervalSince1970))
-        let privateKey = Constant.privateKey
-        let publicKey = Constant.publicKey
+        let privateKey = keys.privateApiKey
+        let publicKey = keys.publicApiKey
         let hash = "\(ts)\(privateKey)\(publicKey)".md5
         var baseParameters: [String: String] = ["apikey": publicKey,
                                                 "ts": ts,

@@ -1,4 +1,5 @@
 PODS:
+  - Keys (1.0.1)
   - Kingfisher (8.3.2)
   - OHHTTPStubs/Core (9.1.0)
   - OHHTTPStubs/Default (9.1.0):
@@ -15,6 +16,7 @@ PODS:
     - OHHTTPStubs/Default
 
 DEPENDENCIES:
+  - Keys (from `Pods/CocoaPodsKeys`)
   - Kingfisher (~> 8.3)
   - OHHTTPStubs/Swift (~> 9.1.0)
 
@@ -23,10 +25,15 @@ SPEC REPOS:
     - Kingfisher
     - OHHTTPStubs
 
+EXTERNAL SOURCES:
+  Keys:
+    :path: Pods/CocoaPodsKeys
+
 SPEC CHECKSUMS:
+  Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
   Kingfisher: 0621d0ac0c78fecb19f6dc5303bde2b52abaf2f5
   OHHTTPStubs: 90eac6d8f2c18317baeca36698523dc67c513831
 
-PODFILE CHECKSUM: 266dbf29979842b5275282d79810a2e12a68cac2
+PODFILE CHECKSUM: 03b5899fca8ddfd99a467d6287df7f14b1678c38
 
 COCOAPODS: 1.16.2
