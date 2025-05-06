@@ -36,11 +36,23 @@ It was tested the happy path and some error cases:
 
 ## Use and installation 
 
-This Project was built using CocoaPods as Dependency Manager. Therefore, Cocoapods is needed:
+This Project was built using a Gemfile to centralize the use of dependencies to all devs. Follow the instructions:
 
-Run: `pod install`
+Make sure you have ruby install:
 
-The open the .xcworkspace generated.
+`which ruby`
+
+Then run: 
+
+`bundle install`
+
+Once the gems are installed execute:
+
+`bundle exec pod install`
+
+During this process the Public and Private key for the API will be asked. Input the keys provided by Orlando
+
+Finally, open the .xcworkspace generated.
 
 ## Consideration and Nice-To-Have
 
