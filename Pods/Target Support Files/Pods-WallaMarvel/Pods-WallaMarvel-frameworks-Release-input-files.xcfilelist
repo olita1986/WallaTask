@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-WallaMarvel/Pods-WallaMarvel-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Keys/Keys.framework
+${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
+${BUILT_PRODUCTS_DIR}/OHHTTPStubs/OHHTTPStubs.framework

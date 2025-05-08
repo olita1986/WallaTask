@@ -1,0 +1,6 @@
+framework module Pods_WallaMarvel_WallaMarvelUITests {
+  umbrella header "Pods-WallaMarvel-WallaMarvelUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
