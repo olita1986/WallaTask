@@ -13,17 +13,15 @@ final class HeroCoordinator: BaseCoordinator {
         presenter.showHeroDetail = { [weak self] hero in
             self?.showHeroDetail(forHero: hero)
         }
-        let listHeroesViewController = ListHeroesViewController()
-        listHeroesViewController.presenter = presenter
+        let listHeroesViewController = ListHeroesViewController(presenter: presenter)
         listHeroesViewController.title = "Hero List"
         navigationController.pushViewController(listHeroesViewController, animated: false)
     }
     
     private func showHeroDetail(forHero hero: CharacterDataModel) {
         let heroDetailPresenter = HeroDetailPresenter(hero: hero)
-        let heroDetailViewController = HeroDetailViewController()
+        let heroDetailViewController = HeroDetailViewController(presenter: heroDetailPresenter)
         heroDetailViewController.title = hero.name
-        heroDetailViewController.presenter = heroDetailPresenter
         navigationController.pushViewController(heroDetailViewController, animated: true)
     }
 }

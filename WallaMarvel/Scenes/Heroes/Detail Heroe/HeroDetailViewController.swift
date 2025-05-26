@@ -10,7 +10,7 @@ import UIKit
 
 final class HeroDetailViewController: UIViewController {
 
-    var presenter: HeroDetailPresenterProtocol?
+    private let presenter: HeroDetailPresenterProtocol
     private var comics = [ComicDataModel]() {
         didSet {
             comicsTableView.reloadData()
@@ -74,13 +74,22 @@ final class HeroDetailViewController: UIViewController {
         return stackView
     }()
 
+    init(presenter: HeroDetailPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
         getInfo()
-        presenter?.ui = self
-        presenter?.getComics()
+        presenter.ui = self
+        presenter.getComics()
     }
     
     private func setupView() {
@@ -101,7 +110,7 @@ final class HeroDetailViewController: UIViewController {
     }
     
     private func getInfo() {
-        guard let hero = presenter?.heroInfo() else { return }
+        let hero = presenter.heroInfo()
         heroeImageView.kf.setImage(with: hero.thumbnail.url)
         heroeNameLabel.text = hero.name
     }
